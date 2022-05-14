@@ -1,6 +1,7 @@
 import React from "react";
 import {Navbar, Nav, NavDropdown, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./NavBar.css"
 
 function HeaderBar(props) {
   return (
@@ -29,6 +30,9 @@ function HeaderBar(props) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+      </style>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
+import "./About.css"
 import { Card } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function About(props) {
   return (
@@ -26,6 +27,7 @@ function About(props) {
           www.drdes.co.za or www.EnvironSkinCare.com
         </Card.Body>
       </Card>
+
     </div>
   );
 }

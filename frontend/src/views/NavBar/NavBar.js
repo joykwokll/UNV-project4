@@ -2,13 +2,14 @@ import React from "react";
 import {Navbar, Nav, NavDropdown, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./NavBar.css"
+import logo from "./unvlogo.png";
 
 function HeaderBar(props) {
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Container>
-          <Navbar.Brand as={Link} to="/home">UNV</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/home"><img src= {logo} /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

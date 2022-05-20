@@ -54,9 +54,9 @@ function Pigmentation(props) {
               </Card.Body>
             </Card>
           </Col>
-          <Col>
+          {/* <Col>
             <Image className="mx-auto d-block" src={product} roundedCircle />{" "}
-          </Col>
+          </Col> */}
         </Row>
 
         <br />

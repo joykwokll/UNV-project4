@@ -8,7 +8,7 @@ function LoginForm(props) {
       <br/>
       <h3>Login to your account!</h3>
       <br/>
-      <Form>
+      <Form >
       <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Username / Email / Contact</Form.Label>
           <Form.Control type="username" placeholder="Username / Email / Contact" />

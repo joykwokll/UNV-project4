@@ -66,7 +66,8 @@ function AntiAging(props) {
 
         <Row className="align-items-center">
           <Col>
-            <h1>YOUTH ESSENTIA® RANGE</h1>
+          <p><b>THE SOLUTIONS</b></p>
+            <h3>YOUTH ESSENTIA® RANGE</h3>
             <Card className="aboutintro">
               <Card.Body>
                 {" "}
@@ -120,7 +121,7 @@ function AntiAging(props) {
           </Col>
        
         </Row>
-        
+
         <br/>
         <br/>
 

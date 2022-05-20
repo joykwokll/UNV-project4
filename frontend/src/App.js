@@ -8,9 +8,9 @@ import About from "./views/Routes/About/About";
 import Home from "./views/Routes/Home/Home";
 import Services from "./views/Routes/Services/Services"
 import Antiaging from "./views/Routes/Services/AntiAging/AntiAging"
-import Pigmentation from "./views/Routes/Services/Pigmentation"
-import Sensitiveskin from "./views/Routes/Services/SensitiveSkin"
-import Pimple from "./views/Routes/Services/Pimple"
+import Pigmentation from "./views/Routes/Services/Pigmentation/Pigmentation"
+import Sensitiveskin from "./views/Routes/Services/SensetiveSkin/SensitiveSkin"
+import Pimple from "./views/Routes/Services/Pimple/Pimple"
 import Tips from "./views/Routes/Tips/Tips"
 import Products from "./views/Routes/Products/Products"
 import Profile from "./views/Routes/Profile/Profile"
@@ -80,8 +80,8 @@ function App() {
         element = { < JoinUs / > } > < /Route>
 
         <
-        /Routes> <
-        /BrowserRouter>
+        /Routes> < /
+        BrowserRouter >
     );
 }
 export default App;

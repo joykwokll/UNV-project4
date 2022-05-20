@@ -18,14 +18,15 @@ function Profile(props) {
   return (
     <Container>
       <Row>
-        <Col></Col>
         <Col> <div className="profile">
-          <p>Profile</p>
+          <h3>Your healthy skin starts today</h3>
+          <p>A journey to your healthy skin starts with the first step, and the first step in making a simple decision
+            to give us an opportunity to serve you. Do fill in your details below to give us this chance!</p>
           <button className="button" onClick={handleLogin}>Login</button>
-          <br/>
+          <br />
           <button className="button" onClick={handleRegister}>Register</button>
         </div></Col>
-        <Col></Col>
+   
       </Row>
     </Container>
 

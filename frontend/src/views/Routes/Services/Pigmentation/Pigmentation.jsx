@@ -65,7 +65,7 @@ function Pigmentation(props) {
         <Row className="align-items-center">
           <Col>
           <p><b>THE SOLUTIONS</b></p>
-            <h3>FOCUS CARETM RADIANCE+ Range</h3>
+            <h3>FOCUS CARETM RADIANCE+ RANGE</h3>
             <Card className="aboutintro">
               <Card.Body>
                 {" "}

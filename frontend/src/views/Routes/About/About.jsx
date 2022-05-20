@@ -3,6 +3,7 @@ import "./About.css";
 import { Card, Container, Row, Col, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import founder from "./founder.jpg";
+import partner from "./partner.jpeg"
 
 function About(props) {
   return (
@@ -43,6 +44,8 @@ function About(props) {
             </Card>
           </Col>
         </Row>
+        <br />
+        <br />
         <Row className="align-middle">
           <Col>
             <h1>About UNV Aesthetics</h1> In 2004, UNV Aesthetics was born. The
@@ -64,9 +67,11 @@ function About(props) {
             and since 2012, we are most probably the first and only beauty salon
             in Singapore that organised Annual Dinner for all our customers
           </Col>
+          <br />
+          <br />
           <Row className="align-items-center">
             <Col>
-              <Image className="mx-auto d-block" src={founder} roundedCircle />{" "}
+              <Image className="mx-auto d-block" src={partner} roundedCircle />{" "}
             </Col>
             <Col xs={8}>
               <h1>Our Partner Dr Des Fernandes</h1>

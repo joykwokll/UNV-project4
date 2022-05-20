@@ -69,7 +69,7 @@ function SensetiveSkin(props) {
         <Row className="align-items-center">
           <Col>
           <p><b>THE SOLUTIONS</b></p>
-            <h3>SKIN ESSENTIA® Range</h3>
+            <h3>SKIN ESSENTIA® RANGE</h3>
             <Card className="aboutintro">
               <Card.Body>
                 {" "}

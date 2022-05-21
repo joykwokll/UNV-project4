@@ -19,23 +19,6 @@ import RegisterForm from "./views/Routes/Profile/RegisterForm"
 import JoinUs from "./views/Routes/JoinUs/JoinUs";
 import ContactUs from "./views/Routes/ContactUs/ContactUs";
 
-const Login = () => {
-    const handleLogin = () => {
-        fetch("/api/login", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: "Michael", password: "123456" })
-        })
-            .then((res) => res.json())
-            .then((res) => console.log(res));
-    }
-    return <button onClick={handleLogin} > Login </button>;
-
-}
-
-
 
 
 function App() {
@@ -44,8 +27,8 @@ function App() {
         <Routes>
             <Route path="home"
                 element={< Home />} > </Route>
-            <Route path="login"
-                element={< Login />} ></Route>
+            {/* <Route path="login"
+                element={< Login />} ></Route> */}
             <Route path="about"
                 element={< About />} > </Route>
             <Route path="services"

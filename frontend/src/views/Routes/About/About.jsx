@@ -67,6 +67,7 @@ function About(props) {
             and since 2012, we are most probably the first and only beauty salon
             in Singapore that organised Annual Dinner for all our customers
           </Col>
+          </Row>
           <br />
           <br />
           <Row className="align-items-center">
@@ -102,7 +103,7 @@ function About(props) {
                 </Card.Body>
               </Card>
             </Col>
-          </Row>
+       
         </Row>
         {/* <Row>
           <Col>1 of 3</Col>

@@ -33,9 +33,7 @@ const Login = () => {
     }
     return <button onClick = { handleLogin } > Login < /button>;
 }
-const People = () => {
-    return "People";
-}
+
 
 
 function App() {
@@ -49,9 +47,7 @@ function App() {
         Route path = "home"
         element = { < Home / > } > < /Route> <
         Route path = "login"
-        element = { < Login / > } > < /Route> <
-        Route path = "people"
-        element = { < People / > } > < /Route> <
+        element = { < Login / > } > < /Route> <  
         Route path = "about"
         element = { < About / > } > < /Route> <
         Route path = "services"

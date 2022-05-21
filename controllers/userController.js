@@ -5,21 +5,21 @@ const express = require("express");
 const User = require("../models/Users");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 
 router.get("/seed", async (req, res) => {
-    // const saltRounds = 10;
+    const saltRounds = 10;
     const userDetails = [
       {
         username: "Joy Kwok",
         email: "hi123@gmail.com",
-        password: "12345"
+        password: bcrypt.hashSync("12345", saltRounds),
       },
       {
         username: "Ivan Leong",
         email: "hi345@gmail.com",
-        password: "12345"
+        password: bcrypt.hashSync("12345", saltRounds),
       },
     ];
     await User.deleteMany({});
@@ -28,16 +28,17 @@ router.get("/seed", async (req, res) => {
   });
 
   router.post("/register/:username", async (req, res) => {
-    // const saltRounds = 10;
+    const saltRounds = 10;
     const body = req.body;
     console.log("body", body);
     try {
       console.log(body);
       const createdUser = await User.create(req.body);
       // const salt = await bcrypt.genSalt(10);
-      createdUser.password = await 
-        createdUser.password
-        
+      createdUser.password = await bcrypt.hashSync(
+        createdUser.password,
+        saltRounds
+      );
       createdUser.save().then(() => res.status(200).send("Success"));
       
     } catch (error) {

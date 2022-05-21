@@ -55,6 +55,7 @@ app.get("/api/hi", (req, res) => {
 });
 
 
+
 const verifyToken = (req, res, next) => {
     try {
         const authToken = req.headers.token;

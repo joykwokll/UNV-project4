@@ -1,44 +1,49 @@
 import React from "react";
-import { Form , Button, Row , Col} from "react-bootstrap"
-import { useState, useEffect } from "react";
-const handleLogin = (username,password) => {
+import { Form , Button, Row, Col} from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+function LoginForm(props) {
+  
+  const handleLogin = () => {
+    console.log("submitted")
     fetch("/api/users/login", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          username: username,
-          password: password})
-  })
-    .then((res) => res.json())
-    .then((res) => console.log(res));
-  }
-function LoginForm() {
-    const [username, setUsername] = useState("Michael");
-    const [password, setPassword] = useState("123456");
-    return (
-        <>
-            <Form>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" onChange={(event) => setUsername(event.target.value)}/>
-                    <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
-                <Button variant="primary" type="submit" onClick={() => {handleLogin(username,password)}}>
-                    Submit
-                </Button>
-            </Form>
-        </>
-    )
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: "Joy Kwok", password: "12345" })
+    })
+        .then((res) => res.json())
+        .then((res) => console.log(res));
 }
+  
+  return (
+    <div>
+      <br/>
+      <h3>Login to your account!</h3>
+      <br/>
+      <Row>
+        <Col>
+      <Form>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Username / Email / Contact </Form.Label>
+          <Form.Control type="username" placeholder="Username / Email / Contact" />
+        </Form.Group>
+      
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" />
+        </Form.Group>
+
+        <Button variant="primary" type="submit" onClick={() => {handleLogin}}>
+          Submit
+        </Button>
+      </Form>
+      </Col>
+      </Row>
+
+    </div>
+  );
+}
+
 export default LoginForm;

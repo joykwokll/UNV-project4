@@ -35,7 +35,7 @@ router.get("/seed", async (req, res) => {
       console.log(body);
       const createdUser = await User.create(req.body);
       // const salt = await bcrypt.genSalt(10);
-      createdUser.password = await bcrypt.hashSync(
+      createdUser.password = bcrypt.hashSync(
         createdUser.password,
         saltRounds
       );

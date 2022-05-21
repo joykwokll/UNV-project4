@@ -1,5 +1,5 @@
 import React from "react";
-import { Form , Button} from "react-bootstrap";
+import { Form , Button, Row, Col} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function LoginForm(props) {
@@ -8,7 +8,9 @@ function LoginForm(props) {
       <br/>
       <h3>Login to your account!</h3>
       <br/>
-      <Form >
+      <Row>
+        <Col>
+      <Form>
       <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Username / Email / Contact</Form.Label>
           <Form.Control type="username" placeholder="Username / Email / Contact" />
@@ -23,6 +25,8 @@ function LoginForm(props) {
           Submit
         </Button>
       </Form>
+      </Col>
+      </Row>
 
     </div>
   );

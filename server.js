@@ -13,7 +13,6 @@ const UserController = require("./controllers/userController")
 
 const PORT = process.env.PORT ?? 5000;
 const mongoURI = process.env.MONGO_URI;
-const db = mongoose.connection;
 mongoose.connect(mongoURI, {}, () => {
     console.log("Connected~")
 })
@@ -45,6 +44,7 @@ const configs = {
 
 // });
 
+
 app.use(express.json());
 app.use("/api/users", UserController);
 
@@ -52,6 +52,35 @@ app.use(express.static("./frontend/build"));
 
 app.get("/api/hi", (req, res) => {
     res.json({ msg: "hello world" });
+});
+
+
+const verifyToken = (req, res, next) => {
+    try {
+        const authToken = req.headers.token;
+
+        // validate the token
+        const decoded = jwt.verify(authToken, process.env.TOKEN_SECRET);
+
+        // if valid, retrieve the username from the token
+        const username = decoded.user;
+
+        req.user = username;
+
+        next();
+    } catch (error) {
+        res.sendStatus(403);
+    }
+};
+
+app.post("/api/posts", verifyToken, (req, res) => {
+    const username = req.user;
+    const userTransactions = transactions[username];
+    res.status(200).json({ transactions: userTransactions });
+});
+
+app.post("/api/logout", (req, res) => {
+    res.clearCookie("NewCookie").send("cookie dead");
 });
 
 app.get("/*", (req, res) => {

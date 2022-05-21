@@ -5,31 +5,21 @@ const express = require("express");
 const User = require("../models/Users");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
-// router.post("/register/:username", async (req, res) => {
-//     const body = req.body;
-//     console.log("body", body);
-//     try {
-//       console.log(body);
-//       const createdUser = await User.create(req.body);
-//       // const salt = await bcrypt.genSalt(10);
-//       createdUser.password = await bcrypt.hashSync(
-//         createdUser.password,
-//         saltRounds
-//       );
-//       createdUser.save().then(() => res.status(200).send("Success"));
 
 router.get("/seed", async (req, res) => {
+    const saltRounds = 10;
     const userDetails = [
       {
         username: "Joy Kwok",
         email: "hi123@gmail.com",
-        password: "88888"
+        password: bcrypt.hashSync("12345", saltRounds),
       },
       {
         username: "Ivan Leong",
         email: "hi345@gmail.com",
-        password: "88888"
+        password: bcrypt.hashSync("12345", saltRounds),
       },
     ];
     await User.deleteMany({});
@@ -37,56 +27,46 @@ router.get("/seed", async (req, res) => {
     res.json(userDetails);
   });
 
+  router.post("/register/:username", async (req, res) => {
+    const saltRounds = 10;
+    const body = req.body;
+    console.log("body", body);
+    try {
+      console.log(body);
+      const createdUser = await User.create(req.body);
+      // const salt = await bcrypt.genSalt(10);
+      createdUser.password = await bcrypt.hashSync(
+        createdUser.password,
+        saltRounds
+      );
+      createdUser.save().then(() => res.status(200).send("Success"));
+      
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
+    const findUserName = await User.findOne({username: req.body.username});
 
-    if (User[username].password === password) {
+    if (findUserName.password === password) {
         //authenticate and create the jwt
         const newToken = jwt.sign({
                 user: username,
             },
             process.env.TOKEN_SECRET, { expiresIn: 60 * 60 }
         );
-
-        const createdUser = await User.create(req.body);
-        createdUser.save().then(() => 
         
         res
             .status(200)
             .cookie("NewCookie", newToken, { path: "/", httpOnly: true })
-            .send("cookie")  );
+            .send("cookie");
     } else { 
-        res.status(403).send("unauthorised");
+        res.status(403).send(findUserName);
     }
 });
 
-const verifyToken = (req, res, next) => {
-    try {
-        const authToken = req.headers.token;
-
-        // validate the token
-        const decoded = jwt.verify(authToken, process.env.TOKEN_SECRET);
-
-        // if valid, retrieve the username from the token
-        const username = decoded.user;
-
-        req.user = username;
-
-        next();
-    } catch (error) {
-        res.sendStatus(403);
-    }
-};
-
-router.post("/api/posts", verifyToken, (req, res) => {
-    const username = req.user;
-    const userTransactions = transactions[username];
-    res.status(200).json({ transactions: userTransactions });
-});
-
-router.post("/api/logout", (req, res) => {
-    res.clearCookie("NewCookie").send("cookie dead");
-});
 
 
 

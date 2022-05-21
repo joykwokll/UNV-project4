@@ -8,7 +8,7 @@ function RegisterForm(props) {
       <br/>
       <h3>Register An Account!</h3>
       <br/>
-      <Form>
+      <Form >
       <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Username</Form.Label>
           <Form.Control type="username" placeholder="Username" />

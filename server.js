@@ -12,7 +12,7 @@ const path = require("path");
 
 const PORT = process.env.PORT ?? 5000;
 const mongoURI = process.env.MONGO_URI;
-// const db = mongoose.connection;
+const db = mongoose.connection;
 mongoose.connect(mongoURI, {}, () => {
     console.log("Connected~")
 })
@@ -23,25 +23,25 @@ const configs = {
     database: 'unv',
     port: 2345,
 };
-const client = new pg.Client(configs);
+// const client = new pg.Client(configs);
 
-client.connect((err) => {
+// client.connect((err) => {
 
-    if (err) {
-        console.log("error", err.message);
-    }
+//     if (err) {
+//         console.log("error", err.message);
+//     }
 
-    const test = 'SELECT * FROM users'
+//     const test = 'SELECT * FROM users'
 
-    client.query(test, (err, res) => {
-        if (err) {
-            console.log("query error", err.message);
-        } else {
-            console.log("result", res.rows[0]);
-        }
-    });
+//     client.query(test, (err, res) => {
+//         if (err) {
+//             console.log("query error", err.message);
+//         } else {
+//             console.log("result", res.rows[0]);
+//         }
+//     });
 
-});
+// });
 
 app.use(express.json());
 app.use(express.static("./frontend/build"));

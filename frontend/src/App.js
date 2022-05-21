@@ -22,62 +22,56 @@ import ContactUs from "./views/Routes/ContactUs/ContactUs";
 const Login = () => {
     const handleLogin = () => {
         fetch("/api/login", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: "Michael", password: "123456" })
-            })
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: "Michael", password: "123456" })
+        })
             .then((res) => res.json())
             .then((res) => console.log(res));
     }
-    return <button onClick = { handleLogin } > Login < /button>;
+    return <button onClick={handleLogin} > Login </button>;
 }
 
 
 
 function App() {
-    return ( <
-        BrowserRouter >
-        <
-        HeaderBar / >
-        <
-        Routes >
-        <
-        Route path = "home"
-        element = { < Home / > } > < /Route> <
-        Route path = "login"
-        element = { < Login / > } > < /Route> <  
-        Route path = "about"
-        element = { < About / > } > < /Route> <
-        Route path = "services"
-        element = { < Services / > } > < /Route> <
-        Route path = "antiaging"
-        element = { < Antiaging / > } > < /Route> <
-        Route path = "pigmentation"
-        element = { < Pigmentation / > } > < /Route> <
-        Route path = "sensitiveskin"
-        element = { < Sensitiveskin / > } > < /Route> <
-        Route path = "pimple"
-        element = { < Pimple / > } > < /Route> <
-        Route path = "beautytips"
-        element = { < Tips / > } > < /Route> <
-        Route path = "products"
-        element = { < Products / > } > < /Route> <
-        Route path = "profile"
-        element = { < Profile / > } > < /Route> <
-        Route path = "loginform"
-        element = { < LoginForm / > } > < /Route> <
-        Route path = "registerform"
-        element = { < RegisterForm / > } > < /Route> <
-        Route path = "contactus"
-        element = { < ContactUs / > } > < /Route> <
-        Route path = "joinus"
-        element = { < JoinUs / > } > < /Route>
+    return (<BrowserRouter>
+        <HeaderBar />
+        <Routes>
+            <Route path="home"
+                element={< Home />} > </Route>
+            <Route path="login"
+                element={< Login />} ></Route>
+            <Route path="about"
+                element={< About />} > </Route>
+            <Route path="services"
+                element={< Services />} > </Route>
+            <Route path="antiaging"
+                element={< Antiaging />} > </Route>
+            <Route path="pigmentation"
+                element={< Pigmentation />} > </Route>
+            <Route path="sensitiveskin"
+                element={< Sensitiveskin />} > </Route>
+            <Route path="pimple"
+                element={< Pimple />} > </Route>
+            <Route path="beautytips"
+                element={< Tips />} > </Route>
+            <Route path="products"
+                element={< Products />} > </Route>
+            <Route path="profile"
+                element={< Profile />} > </Route>
+            <Route path="loginform"
+                element={< LoginForm />} > </Route>
+            <Route path="registerform"
+                element={< RegisterForm />} > </Route>
+            <Route path="contactus"
+                element={< ContactUs />} > </Route>
+            <Route path="joinus"
+                element={< JoinUs />} > </Route>
 
-        <
-        /Routes> < /
-        BrowserRouter >
+        </Routes> </BrowserRouter>
     );
 }
 export default App;

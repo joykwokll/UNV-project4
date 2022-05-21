@@ -10,7 +10,7 @@ const transactions = require("./transactions");
 const path = require("path");
 // const pg = require('pg');
 
-const PORT = process.env.PORT ? ? 5000;
+const PORT = process.env.PORT ?? 5000;
 const mongoURI = process.env.MONGO_URI;
 // const db = mongoose.connection;
 mongoose.connect(mongoURI, {}, () => {

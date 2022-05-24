@@ -8,7 +8,7 @@ function RegisterForm(props) {
       <br/>
       <h3>Register An Account!</h3>
       <br/>
-      <Form >
+      <Form>
       <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Username</Form.Label>
           <Form.Control type="username" placeholder="Username" />
@@ -47,7 +47,7 @@ function RegisterForm(props) {
 
 export default RegisterForm;
 
-{
+
   /* // // import { useState } from "react";
 // // import urlcat from "urlcat";
 // // import { BACKEND } from "../../../utils/utils";
@@ -55,7 +55,7 @@ export default RegisterForm;
 
 
 // function Register() { */
-}
+
 //   const [error, setError] = useState("");
 //   const [username, setUsername] = useState("");
 //   const [email, setEmail] = useState("");

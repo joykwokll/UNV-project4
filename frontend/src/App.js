@@ -18,7 +18,7 @@ import LoginForm from "./views/Routes/Profile/LoginForm"
 import RegisterForm from "./views/Routes/Profile/RegisterForm"
 import JoinUs from "./views/Routes/JoinUs/JoinUs";
 import ContactUs from "./views/Routes/ContactUs/ContactUs";
-
+import Secret from "./views/Routes/Profile/Secret"
 
 
 function App() {
@@ -31,6 +31,8 @@ function App() {
                 element={< Login />} ></Route> */}
             <Route path="about"
                 element={< About />} > </Route>
+            <Route path="secret"
+                element={< Secret />} > </Route>
             <Route path="services"
                 element={< Services />} > </Route>
             <Route path="antiaging"

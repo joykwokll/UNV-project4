@@ -45,6 +45,7 @@ router.get("/seed", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
+    console.log("BODY REQUEST",req.body);
     const findUserName = await User.findOne({username: req.body.username});
 
     if (findUserName.password === password) {
@@ -58,7 +59,7 @@ router.post("/login", async (req, res) => {
         res
             .status(200)
             .cookie("NewCookie", newToken, { path: "/", httpOnly: true })
-            .send("cookie");
+            .send({"jwt":newToken});
     } else { 
         res.status(403).send(findUserName);
     }

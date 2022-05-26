@@ -26,7 +26,7 @@ function App() {
     return (<BrowserRouter>
         <HeaderBar />
         <Routes>
-            <Route path="home"
+            <Route path="/"
                 element={< Home />} > </Route>
             {/* <Route path="login"
                 element={< Login />} ></Route> */}

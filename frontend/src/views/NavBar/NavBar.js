@@ -3,13 +3,20 @@ import {Navbar, Nav, NavDropdown, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./NavBar.css"
 import logo from "./unvlogo.png";
+import {useState, useEffect} from 'react'
 
 function HeaderBar(props) {
+  const [username, setUsername] = useState("");
+  useEffect(() => { 
+      let loggedUser = sessionStorage.getItem("username") 
+      console.log(loggedUser);
+      setUsername(loggedUser);
+  }, []);
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Container>
-          <Navbar.Brand as={Link} to="/home"><img src= {logo} /></Navbar.Brand>
+          <Navbar.Brand as={Link} to="/"><img src= {logo} /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -22,7 +29,8 @@ function HeaderBar(props) {
               </NavDropdown>
               <Nav.Link as={Link} to="/beautytips">Beauty Tips</Nav.Link>
               <Nav.Link as={Link} to="/products">Products</Nav.Link>
-              <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+              { username  ?  <Nav.Link as={Link} to="/loggedin">{username} </Nav.Link>  : <Nav.Link as={Link} to="/profile">Profile</Nav.Link>}
+              
               
             </Nav>
             <Nav>

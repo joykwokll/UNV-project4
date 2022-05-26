@@ -33,7 +33,7 @@ function RegisterForm(props) {
           navigate("/loginform");
 }
   return (
-    <div>
+    <div className="m-5">
       <br/>
       <h3>Register An Account!</h3>
       <br/>

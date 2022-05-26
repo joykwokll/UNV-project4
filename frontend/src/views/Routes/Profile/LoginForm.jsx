@@ -33,6 +33,7 @@ function LoginForm(props) {
 
           if (data.successful) {
             sessionStorage.setItem("jwt",data.jwt)
+            sessionStorage.setItem("username", username)
             navigate("/loggedin");
           } else {
             setError("Invalid Username or Password")
@@ -47,7 +48,7 @@ function LoginForm(props) {
 }
   
   return (
-    <div>
+    <div className="m-5">
       <br/>
       <h3>Login to your account!</h3>
       <br/>

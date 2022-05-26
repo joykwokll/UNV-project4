@@ -22,7 +22,7 @@ function Profile(props) {
           <h3>Your healthy skin starts today</h3>
           <p>A journey to your healthy skin starts with the first step, and the first step in making a simple decision
             to give us an opportunity to serve you. Do fill in your details below to give us this chance!</p>
-          <button className="button" onClick={handleLogin}>Login</button>
+          <button className="button mb-2" onClick={handleLogin}>Login</button>
           <br />
           <button className="button" onClick={handleRegister}>Register</button>
         </div></Col>

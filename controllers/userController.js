@@ -26,7 +26,7 @@ router.get("/seed", async (req, res) => {
     res.json(userDetails);
   });
 
-  router.post("/register/:username", async (req, res) => {
+  router.post("/register", async (req, res) => {
     // const saltRounds = 10;
     const body = req.body;
     console.log("body", body);
@@ -59,9 +59,9 @@ router.post("/login", async (req, res) => {
         res
             .status(200)
             .cookie("NewCookie", newToken, { path: "/", httpOnly: true })
-            .send({"jwt":newToken});
+            .send({"jwt":newToken, "successful":true});
     } else { 
-        res.status(403).send(findUserName);
+        res.status(403).send({"sucessful":false});
     }
 });
 

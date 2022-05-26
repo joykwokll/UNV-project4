@@ -1,5 +1,5 @@
 import React from "react";
-import { Form , Button, Row, Col} from "react-bootstrap";
+import { Form , Button, Row, Col, Alert} from "react-bootstrap";
 import {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from "react-router-dom";
@@ -36,7 +36,15 @@ function LoginForm(props) {
             sessionStorage.setItem("username", username)
             navigate("/loggedin");
           } else {
-            setError("Invalid Username or Password")
+            setError(<>
+              {[
+                'danger',
+              ].map((variant) => (
+                <Alert key={variant} variant={variant} mt-2>
+                  The Username or Password is invalid!
+                </Alert>
+              ))}
+            </>)
           }
         });
 

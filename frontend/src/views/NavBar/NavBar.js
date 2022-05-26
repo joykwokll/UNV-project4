@@ -1,12 +1,10 @@
 import React from "react";
-import {Navbar, Nav, NavDropdown, Container} from "react-bootstrap";
+import {Navbar, Nav, NavDropdown, Container, Button} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./NavBar.css"
 import logo from "./unvlogo.png";
 import {useState, useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
-
-
 
 
 function HeaderBar(props) {
@@ -18,6 +16,8 @@ function HeaderBar(props) {
       console.log(loggedUser);
       setUsername(loggedUser);
   }, []);
+  // useEffect(() => { ... }, [sessionStorage.getItem("username"')]);
+  
 
   let loggedoutUser = () => {
     sessionStorage.removeItem("username")
@@ -25,9 +25,6 @@ function HeaderBar(props) {
     navigate("/profile")
 
   }
-
-
-
 
 
   return (
@@ -48,7 +45,7 @@ function HeaderBar(props) {
               <Nav.Link as={Link} to="/beautytips">Beauty Tips</Nav.Link>
               <Nav.Link as={Link} to="/products">Products</Nav.Link>
               { username  ?  <Nav.Link as={Link} to="/loggedin">{username} </Nav.Link>  : <Nav.Link as={Link} to="/profile">Profile</Nav.Link>}
-              { username  ?  <button onClick={loggedoutUser}>Log Out</button>  : "" }
+              { username  ?  <Button variant="outline-dark" size="sm" onClick={loggedoutUser} >Log Out</Button> : "" }
                
               
               

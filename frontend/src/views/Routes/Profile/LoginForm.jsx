@@ -2,18 +2,25 @@ import React from "react";
 import { Form , Button, Row, Col} from "react-bootstrap";
 import {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {useNavigate} from "react-router-dom";
 
 function LoginForm(props) {
-  const [username,setUsername] = useState("Joy Kwok")
-  const [password,setPassword] = useState("12345")
-  
+  let navigate = useNavigate();
+  const [username,setUsername] = useState("")
+  const [password,setPassword] = useState("")
+  const [error, setError] = useState("")
+
+  //check if denied or accepted (frontend)
+  //check with database if have such user, pw same (backend)
+
   const handleLogin = (event) => {
     event.preventDefault();
     console.log("submitted")
     fetch("/api/users/login", {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         },
         body: JSON.stringify({ username: username, password: password })
     })
@@ -22,8 +29,21 @@ function LoginForm(props) {
           return res.json()
         })
         .then((data) => {
-          sessionStorage.setItem("jwt",data.jwt)
-          console.log("data",data)});
+          console.log("data",data)
+
+          if (data.successful) {
+            sessionStorage.setItem("jwt",data.jwt)
+            navigate("/loggedin");
+          } else {
+            setError("Invalid Username or Password")
+          }
+        });
+
+        
+    
+
+
+          
 }
   
   return (
@@ -36,17 +56,19 @@ function LoginForm(props) {
       <Form>
       <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Username / Email / Contact </Form.Label>
-          <Form.Control type="username" placeholder="Username / Email / Contact" />
+          <Form.Control type="username" placeholder="Username / Email / Contact" value={username} onChange={(event) => {setUsername(event.target.value)}} />
         </Form.Group>
       
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" value={password} onChange={(event) => {setPassword(event.target.value)}} />
         </Form.Group>
 
         <Button variant="primary" type="submit" onClick={(event) => {handleLogin(event)}}>
           Submit
         </Button>
+        <br/>
+       <p> {error} </p>
       </Form>
       </Col>
       </Row>

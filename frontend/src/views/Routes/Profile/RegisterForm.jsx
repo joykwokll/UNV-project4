@@ -1,8 +1,37 @@
 import React from "react";
 import { Form , Button} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {useState} from 'react'
+import {useNavigate} from "react-router-dom";
 
 function RegisterForm(props) {
+  let navigate = useNavigate();
+  const [username,setUsername] = useState("")
+  const [email,setEmail] = useState("")
+  const [contact,setContact] = useState("")
+  const [password,setPassword] = useState("")
+  
+  const handleRegister = (event) => {
+    event.preventDefault();
+    console.log("submitted")
+    fetch("/api/users/register", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ username: username, email: email, contact: contact, password: password })
+    })
+        .then((res) => {
+          console.log("response2",res)
+          return res.json()
+        })
+        .then((data) => {
+          sessionStorage.setItem("jwt",data.jwt)
+          console.log("data",data)});
+
+          navigate("/loginform");
+}
   return (
     <div>
       <br/>
@@ -11,22 +40,22 @@ function RegisterForm(props) {
       <Form>
       <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Username</Form.Label>
-          <Form.Control type="username" placeholder="Username" />
+          <Form.Control type="username" placeholder="Username" value={username} onChange={(event) => {setUsername(event.target.value)}}/>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control type="email" placeholder="Enter email" value={email} onChange={(event) => {setEmail(event.target.value)}}/>
       
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3" controlId="formBasicContact">
           <Form.Label>Contact number</Form.Label>
-          <Form.Control type="contact" placeholder="Contact number" />
+          <Form.Control type="contact" placeholder="Contact number" value={contact} onChange={(event) => {setContact(event.target.value)}} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control type="password" placeholder="Password" value={password} onChange={(event) => {setPassword(event.target.value)}}/>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -36,7 +65,7 @@ function RegisterForm(props) {
             We'll never share your details with anyone else.
           </Form.Text>
           <br/>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={(event) => {handleRegister(event)}}>
           Submit
         </Button>
       </Form>

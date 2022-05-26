@@ -19,6 +19,7 @@ import RegisterForm from "./views/Routes/Profile/RegisterForm"
 import JoinUs from "./views/Routes/JoinUs/JoinUs";
 import ContactUs from "./views/Routes/ContactUs/ContactUs";
 import Secret from "./views/Routes/Profile/Secret"
+import Loggedin from "./views/Routes/Profile/Loggedin"
 
 
 function App() {
@@ -53,6 +54,8 @@ function App() {
                 element={< LoginForm />} > </Route>
             <Route path="registerform"
                 element={< RegisterForm />} > </Route>
+            <Route path="loggedin"
+                element={< Loggedin />} > </Route>
             <Route path="contactus"
                 element={< ContactUs />} > </Route>
             <Route path="joinus"

@@ -23,6 +23,7 @@ function HeaderBar(props) {
               <Nav.Link as={Link} to="/beautytips">Beauty Tips</Nav.Link>
               <Nav.Link as={Link} to="/products">Products</Nav.Link>
               <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+              
             </Nav>
             <Nav>
             <Nav.Link as={Link} to="/contactus">Contact Us</Nav.Link>

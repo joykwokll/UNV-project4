@@ -12,6 +12,12 @@ function Profile(props) {
         setUsername(loggedUser);
     }, []);
 
+    let loggedoutUser = () => {
+        sessionStorage.removeItem("username")
+        sessionStorage.removeItem("jwt")
+    
+      }
+
 
   return (
     <Container>
@@ -22,6 +28,8 @@ function Profile(props) {
             to give us an opportunity to serve you. Do fill in your details below to give us this chance!</p>
     
         </div></Col>
+
+
    
       </Row>
     </Container>

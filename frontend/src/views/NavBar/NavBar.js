@@ -4,14 +4,32 @@ import { Link } from "react-router-dom";
 import "./NavBar.css"
 import logo from "./unvlogo.png";
 import {useState, useEffect} from 'react'
+import {useNavigate} from "react-router-dom";
+
+
+
 
 function HeaderBar(props) {
+  let navigate = useNavigate();
   const [username, setUsername] = useState("");
+  
   useEffect(() => { 
       let loggedUser = sessionStorage.getItem("username") 
       console.log(loggedUser);
       setUsername(loggedUser);
   }, []);
+
+  let loggedoutUser = () => {
+    sessionStorage.removeItem("username")
+    sessionStorage.removeItem("jwt")
+    navigate("/profile")
+
+  }
+
+
+
+
+
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -30,6 +48,8 @@ function HeaderBar(props) {
               <Nav.Link as={Link} to="/beautytips">Beauty Tips</Nav.Link>
               <Nav.Link as={Link} to="/products">Products</Nav.Link>
               { username  ?  <Nav.Link as={Link} to="/loggedin">{username} </Nav.Link>  : <Nav.Link as={Link} to="/profile">Profile</Nav.Link>}
+              { username  ?  <button onClick={loggedoutUser}>Log Out</button>  : "" }
+               
               
               
             </Nav>

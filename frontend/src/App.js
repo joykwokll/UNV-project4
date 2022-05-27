@@ -2,6 +2,7 @@ import {
     BrowserRouter,
     Routes,
     Route,
+    useSearchParams,
 } from "react-router-dom";
 import HeaderBar from './views/NavBar/NavBar';
 import About from "./views/Routes/About/About";
@@ -20,18 +21,25 @@ import JoinUs from "./views/Routes/JoinUs/JoinUs";
 import ContactUs from "./views/Routes/ContactUs/ContactUs";
 import Secret from "./views/Routes/Profile/Secret"
 import Loggedin from "./views/Routes/Profile/Loggedin"
+import {useState} from 'react';
 
 
 function App() {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const setLogin = (arg) => {
+        setIsLoggedIn(arg)
+    }
+
     return (<BrowserRouter>
-        <HeaderBar />
+        <HeaderBar isLoggedIn={isLoggedIn}/>
         <Routes>
             <Route path="/"
                 element={< Home />} > </Route>
             {/* <Route path="login"
                 element={< Login />} ></Route> */}
             <Route path="about"
-                element={< About />} > </Route>
+                element={< About isLoggedIn={isLoggedIn}/>} > </Route>
             <Route path="secret"
                 element={< Secret />} > </Route>
             <Route path="services"
@@ -51,17 +59,19 @@ function App() {
             <Route path="profile"
                 element={< Profile />} > </Route>
             <Route path="loginform"
-                element={< LoginForm />} > </Route>
+                element={< LoginForm setLogin={setLogin}/>} > </Route>
             <Route path="registerform"
                 element={< RegisterForm />} > </Route>
             <Route path="loggedin"
-                element={< Loggedin />} > </Route>
+                element={< Loggedin isLoggedIn={isLoggedIn}/>} > </Route>
             <Route path="contactus"
                 element={< ContactUs />} > </Route>
             <Route path="joinus"
                 element={< JoinUs />} > </Route>
 
-        </Routes> </BrowserRouter>
+        </Routes>
+    
+        </BrowserRouter>
     );
 }
 export default App;

@@ -10,20 +10,24 @@ import {useNavigate} from "react-router-dom";
 function HeaderBar(props) {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
+  const [loggedOut, setLoggedOut] = useState("Profile");
+  const {isLoggedIn} = props;
+
   
   useEffect(() => { 
       let loggedUser = sessionStorage.getItem("username") 
       console.log(loggedUser);
       setUsername(loggedUser);
-  }, []);
+  }, [isLoggedIn]);
   // useEffect(() => { ... }, [sessionStorage.getItem("username"')]);
   
 
-  let loggedoutUser = () => {
+  let loggedoutUser = (event) => {
+    event.preventDefault();
     sessionStorage.removeItem("username")
     sessionStorage.removeItem("jwt")
+    setUsername("")
     navigate("/profile")
-
   }
 
 

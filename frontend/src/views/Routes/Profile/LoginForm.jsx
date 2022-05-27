@@ -10,6 +10,7 @@ function LoginForm(props) {
   const [password,setPassword] = useState("")
   const [error, setError] = useState("")
 
+  const {setLogin} = props;
   //check if denied or accepted (frontend)
   //check with database if have such user, pw same (backend)
 
@@ -34,6 +35,7 @@ function LoginForm(props) {
           if (data.successful) {
             sessionStorage.setItem("jwt",data.jwt)
             sessionStorage.setItem("username", username)
+            setLogin(true)
             navigate("/loggedin");
           } else {
             setError(<>

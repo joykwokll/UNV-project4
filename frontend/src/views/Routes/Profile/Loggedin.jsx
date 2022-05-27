@@ -5,12 +5,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 
 function Profile(props) {
+
+  const {isLoggedIn} = props
+
     const [username, setUsername] = useState("");
+  
     useEffect(() => { 
         let loggedUser = sessionStorage.getItem("username") 
         console.log(loggedUser);
         setUsername(loggedUser);
-    }, []);
+    }, [isLoggedIn]);
 
     let loggedoutUser = () => {
         sessionStorage.removeItem("username")
@@ -24,8 +28,8 @@ function Profile(props) {
       <Row>
         <Col> <div className="profile">
           <h3>Hi! {username}</h3>
-          <p>A journey to your healthy skin starts with the first step, and the first step in making a simple decision
-            to give us an opportunity to serve you. Do fill in your details below to give us this chance!</p>
+          <p>Make an appointment! </p>
+          
     
         </div></Col>
 

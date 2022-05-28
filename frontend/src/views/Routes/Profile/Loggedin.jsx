@@ -1,8 +1,11 @@
 import React from "react";
 import "./Profile.css"
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+
 
 function Profile(props) {
 
@@ -27,9 +30,12 @@ function Profile(props) {
     <Container>
       <Row>
         <Col> <div className="profile">
-          <h3>Hi! {username}</h3>
+          <h3>Hi! {username} <Button variant="outline-dark" size="sm" onClick={loggedoutUser} >Edit profile</Button></h3>  
           <p>Make an appointment! </p>
+          <Calendar />
+
           
+
     
         </div></Col>
 

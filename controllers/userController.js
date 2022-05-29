@@ -65,22 +65,23 @@ router.post("/register", async (req, res) => {
 //Login
 
 router.post("/login", async (req, res) => {
-  const { username, password, email, contact } = req.body;
+  const { usernameOrEmailOrContact, password } = req.body;
 
-  console.log("BODY REQUEST", req.body); 
+  console.log("BODY REQUEST", req.body);  
  
   // const findUserName = await User.findOne({ $or: [{ username }, { email }, { contact }] })
   let findUserName = null
-  console.log("findUSer", findUserName)
-  if (username || email || contact) {
-    findUserName = await User.findOne( [{ username }, { email }, { contact }] )
-  // } else if (email) {
-  //   findUserName = await User.findOne({ email });
-  // }
-  // else if (contact){
-  //   findUserName = await User.findOne({ contact });
+  console.log("findUSer1", findUserName)
+  if(!findUserName){
+    findUserName = await User.findOne( { username: usernameOrEmailOrContact} );
   }
-  console.log("findUSer", findUserName)
+  if(!findUserName){
+    findUserName = await User.findOne({ contact: usernameOrEmailOrContact });
+  }
+  if(!findUserName){
+    findUserName = await User.findOne({ email: usernameOrEmailOrContact });
+  }
+  console.log("findUSer2", findUserName)
   if (findUserName !== null){
     console.log(findUserName)
     const validPassword = await bcrypt.compare(
@@ -91,7 +92,7 @@ router.post("/login", async (req, res) => {
     if (validPassword) {
       //authenticate and create the jwt
       const newToken = jwt.sign({
-        user: username,
+        user: findUserName.username,
       },
         process.env.TOKEN_SECRET, { expiresIn: 60 * 60 }
       );
@@ -99,7 +100,7 @@ router.post("/login", async (req, res) => {
       res
         .status(200)
         .cookie("NewCookie", newToken, { path: "/", httpOnly: true })
-        .send({ "jwt": newToken, "successful": true });
+        .send({ "jwt": newToken, "successful": true, "username": findUserName.username});
     } else {
       // res.status(403).send({ "sucessful": false });
       console.log("user does not exist")

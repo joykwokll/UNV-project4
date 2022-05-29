@@ -16,6 +16,7 @@ function HeaderBar(props) {
   
   useEffect(() => { 
       let loggedUser = sessionStorage.getItem("username") 
+      
       console.log(loggedUser);
       setUsername(loggedUser);
   }, [isLoggedIn]);

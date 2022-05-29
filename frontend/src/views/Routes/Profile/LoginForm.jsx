@@ -6,13 +6,34 @@ import {useNavigate} from "react-router-dom";
 
 function LoginForm(props) {
   let navigate = useNavigate();
-  const [username,setUsername] = useState("")
+  const [usernameOrEmailOrContact,setUsernameOrEmailOrContact] = useState("")
   const [password,setPassword] = useState("")
+
   const [error, setError] = useState("")
 
   const {setLogin} = props;
   //check if denied or accepted (frontend)
   //check with database if have such user, pw same (backend)
+
+  const resetPassword = (event) => {
+    event.preventDefault();
+    fetch("/api/users/passwordreset", {
+      method: "POST",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(event),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -23,7 +44,7 @@ function LoginForm(props) {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify({ username: username, password: password })
+        body: JSON.stringify({ usernameOrEmailOrContact: usernameOrEmailOrContact, password: password })
     })
         .then((res) => {
           console.log("response2",res)
@@ -34,7 +55,8 @@ function LoginForm(props) {
 
           if (data.successful) {
             sessionStorage.setItem("jwt",data.jwt)
-            sessionStorage.setItem("username", username)
+            sessionStorage.setItem("username", data.username)
+            
             setLogin(true)
             navigate("/loggedin");
           } else {
@@ -67,7 +89,7 @@ function LoginForm(props) {
       <Form>
       <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Username / Email / Contact </Form.Label>
-          <Form.Control type="username" placeholder="Username / Email / Contact" value={username} onChange={(event) => {setUsername(event.target.value)}} />
+          <Form.Control type="username" placeholder="Username / Email / Contact" value={usernameOrEmailOrContact} onChange={(event) => {setUsernameOrEmailOrContact(event.target.value)}} />
         </Form.Group>
       
         <Form.Group className="mb-3" controlId="formBasicPassword">

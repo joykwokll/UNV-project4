@@ -67,7 +67,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password, email, contact } = req.body;
 
-  console.log("BODY REQUEST", req.body);
+  console.log("BODY REQUEST", req.body); 
  
   // const findUserName = await User.findOne({ $or: [{ username }, { email }, { contact }] })
   let findUserName = null

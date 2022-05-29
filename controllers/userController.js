@@ -7,34 +7,34 @@ const User = require("../models/Users");
 const PasswordReset = require("../models/PasswordReset");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 dotenv.config();
 const { v4: uuidv4 } = require("uuid");
 const res = require("express/lib/response");
+
+//Nodemailer
 const nodemailer = require("nodemailer");
-//nodemailer
+const { find } = require('../models/Users');
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.AUTH_EMAIL,
     pass: process.env.AUTH_PASS,
-    // user: "Joyjoy",
-    // pass: "123"
   }
 })
-
+const saltRounds = 10;
 router.get("/seed", async (req, res) => {
   const userDetails = [
     {
       username: "Joy Kwok",
       email: "hi123@gmail.com",
-      password: "12345",
+      password: bcrypt.hashSync("12345", saltRounds),
     },
     {
       username: "Ivan Leong",
       email: "hi345@gmail.com",
-      password: "12345",
+      password: bcrypt.hashSync("12345", saltRounds),
     },
   ];
   await User.deleteMany({});
@@ -44,16 +44,17 @@ router.get("/seed", async (req, res) => {
 
 //Register
 router.post("/register", async (req, res) => {
-  // const saltRounds = 10;
+  const saltRounds = 10;
   const body = req.body;
   console.log("body", body);
   try {
     console.log(body);
     const createdUser = await User.create(req.body);
-    // const salt = await bcrypt.genSalt(10);
-    createdUser.password =
+    createdUser.password = await bcrypt.hashSync(
       createdUser.password,
-      createdUser.save().then(() => res.status(200).send("Success"));
+      saltRounds
+    );
+    createdUser.save().then(() => res.status(200).send("Success"));
 
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -62,28 +63,53 @@ router.post("/register", async (req, res) => {
 
 
 //Login
+
 router.post("/login", async (req, res) => {
-  const {username, password, email, contact} = req.body;
+  const { username, password, email, contact } = req.body;
 
   console.log("BODY REQUEST", req.body);
-  const findUserName = await User.findOne({$or: [{username, password}, {email, password}, {contact, password}]})
 
-  if (findUserName.password === password) {
-    //authenticate and create the jwt
-    const newToken = jwt.sign({
-      user: username,
-    },
-      process.env.TOKEN_SECRET, { expiresIn: 60 * 60 }
-    );
-
-    res
-      .status(200)
-      .cookie("NewCookie", newToken, { path: "/", httpOnly: true })
-      .send({ "jwt": newToken, "successful": true });
-  } else {
-    res.status(403).send({ "sucessful": false });
+  // const findUserName = await User.findOne({ $or: [{ username }, { email }, { contact }] })
+  let findUserName = null
+  console.log("findUSer", findUserName)
+  if (username || email || contact) {
+    findUserName = await User.findOne( [{ username }, { email }, { contact }] )
+  // } else if (email) {
+  //   findUserName = await User.findOne({ email });
+  // }
+  // else if (contact){
+  //   findUserName = await User.findOne({ contact });
   }
+  console.log("findUSer", findUserName)
+  if (findUserName !== null){
+    console.log(findUserName)
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      findUserName.password
+      // saltRounds
+    );
+    if (validPassword) {
+      //authenticate and create the jwt
+      const newToken = jwt.sign({
+        user: username,
+      },
+        process.env.TOKEN_SECRET, { expiresIn: 60 * 60 }
+      );
+
+      res
+        .status(200)
+        .cookie("NewCookie", newToken, { path: "/", httpOnly: true })
+        .send({ "jwt": newToken, "successful": true });
+    } else {
+      // res.status(403).send({ "sucessful": false });
+      console.log("user does not exist")
+    }
+  }
+  // } else { console.log("user does not exist") }
 });
+
+
+
 
 //Password reset
 router.post("/passwordreset", (req, res) => {

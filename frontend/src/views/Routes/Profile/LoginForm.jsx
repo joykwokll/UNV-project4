@@ -89,7 +89,7 @@ function LoginForm(props) {
               setError(<>
                 {[
                   'danger',
-                ].map((variant) => (
+                ].map((variant) => ( 
                   <Alert key={variant} variant={variant} className="mt-3">
                     The Username or Password is invalid!
                   </Alert>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form , Button, Row, Col, Alert} from "react-bootstrap";
+import { Form , Button, Row, Col, Alert, Modal} from "react-bootstrap";
 import {useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from "react-router-dom";
@@ -8,6 +8,10 @@ function LoginForm(props) {
   let navigate = useNavigate();
   const [usernameOrEmailOrContact,setUsernameOrEmailOrContact] = useState("")
   const [password,setPassword] = useState("")
+  const [forgetEmail, setForgetEmail] = useState("")
+  const [sentEmail, setSentEmail] = useState(false)
+  const [forgetEmailError, setForgetEmailError] = useState("")
+
 
   const [error, setError] = useState("")
 
@@ -22,16 +26,23 @@ function LoginForm(props) {
       credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        'Accept': 'application/json'
+        'Accept': 'application/json',
       },
-      body: JSON.stringify(event),
+      body: JSON.stringify({
+        redirectURL : "google.com",
+        email: forgetEmail
+      })
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.error) {
-          setError(data.error);
+        if (data.status === "FAILED") {
+          setForgetEmailError(data.message);
         }
-      })
+        else {
+          setSentEmail(true)
+        }
+      }) 
+      
       .catch((error) => console.log(error));
   };
 
@@ -70,16 +81,14 @@ function LoginForm(props) {
               ))}
             </>)
           }
-        });
+        });        
+    }
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-        
-    
-
-
-          
-}
-  
   return (
+
     <div className="m-5">
       <br/>
       <h3>Login to your account!</h3>
@@ -105,7 +114,51 @@ function LoginForm(props) {
       </Form>
       </Col>
       </Row>
-
+      <Button variant="outline-danger" size="sm" onClick={handleShow}>
+        Forget Your Password?
+      </Button>
+        
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Reset your password here!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                value={forgetEmail}
+                onChange={event => setForgetEmail(event.target.value)}
+                autoFocus
+              />
+            </Form.Group>
+            {/* <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Example textarea</Form.Label>
+              <Form.Control as="textarea" rows={3} />
+            </Form.Group> */}
+          </Form>
+          {sentEmail
+          ? <p><i>Email have been sent! Kindly check your inbox.</i></p> 
+          : forgetEmailError}
+         
+        </Modal.Body>
+        
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={(event) => {resetPassword(event)}}>
+            Request reset
+          </Button>
+          
+          
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

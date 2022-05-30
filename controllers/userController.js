@@ -67,22 +67,22 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { usernameOrEmailOrContact, password } = req.body;
 
-  console.log("BODY REQUEST", req.body);  
- 
+  console.log("BODY REQUEST", req.body);
+
   // const findUserName = await User.findOne({ $or: [{ username }, { email }, { contact }] })
   let findUserName = null
   console.log("findUSer1", findUserName)
-  if(!findUserName){
-    findUserName = await User.findOne( { username: usernameOrEmailOrContact} );
+  if (!findUserName) {
+    findUserName = await User.findOne({ username: usernameOrEmailOrContact });
   }
-  if(!findUserName){
+  if (!findUserName) {
     findUserName = await User.findOne({ contact: usernameOrEmailOrContact });
   }
-  if(!findUserName){
+  if (!findUserName) {
     findUserName = await User.findOne({ email: usernameOrEmailOrContact });
   }
   console.log("findUSer2", findUserName)
-  if (findUserName !== null){
+  if (findUserName !== null) {
     console.log(findUserName)
     const validPassword = await bcrypt.compare(
       req.body.password,
@@ -100,7 +100,7 @@ router.post("/login", async (req, res) => {
       res
         .status(200)
         .cookie("NewCookie", newToken, { path: "/", httpOnly: true })
-        .send({ "jwt": newToken, "successful": true, "username": findUserName.username});
+        .send({ "jwt": newToken, "successful": true, "username": findUserName.username });
     } else {
       // res.status(403).send({ "sucessful": false });
       console.log("user does not exist")
@@ -118,33 +118,27 @@ router.post("/passwordreset", (req, res) => {
 
   //check if email exists
   User
-    .find({ email })
+    .find({email})
     .then((data) => {
+      console.log("data",data)
       if (data.length) {
         sentResetEmail(data[0], redirectURL, res);
       } else {
         res.json({
           status: "FAILED",
-          message: "Email do not exist",
+          message: "Email does not exist.",
         })
-          .catch(error => {
-            console.log(error);
-            res.json({
-              status: "FAILED",
-              message: "An error occured",
-            });
-          })
       }
     })
 })
 
 
-//Send password reset email
-const sentResetEmail = ({ _id, email }, redirectURL, res) => {
+//Sen√çd password reset email
+const sentResetEmail = ({ password, email, _id }, redirectURL, res) => {
   const resetString = uuidv4 + _id;
 
   PasswordReset
-    .deleteMany({ userId: _id })
+    .deleteMany({ password: password })
     .then(result => {
       const mailOptions = {
         from: process.env.AUTH_EMAIL,

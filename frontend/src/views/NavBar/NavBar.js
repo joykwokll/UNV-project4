@@ -11,13 +11,11 @@ function HeaderBar(props) {
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [loggedOut, setLoggedOut] = useState("Profile");
-  const {isLoggedIn} = props;
+  const {isLoggedIn, setLogin} = props;
 
-  
   useEffect(() => { 
+      console.log(isLoggedIn)
       let loggedUser = sessionStorage.getItem("username") 
-      
-      console.log(loggedUser);
       setUsername(loggedUser);
   }, [isLoggedIn]);
   // useEffect(() => { ... }, [sessionStorage.getItem("username"')]);
@@ -28,6 +26,7 @@ function HeaderBar(props) {
     sessionStorage.removeItem("username")
     sessionStorage.removeItem("jwt")
     setUsername("")
+    setLogin(false)
     navigate("/profile")
   }
 

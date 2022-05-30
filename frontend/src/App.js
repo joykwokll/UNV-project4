@@ -32,7 +32,7 @@ function App() {
     }
 
     return (<BrowserRouter>
-        <HeaderBar isLoggedIn={isLoggedIn}/>
+        <HeaderBar isLoggedIn={isLoggedIn} setLogin={setLogin}/>
         <Routes>
             <Route path="/"
                 element={< Home />} > </Route>

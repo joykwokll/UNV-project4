@@ -43,7 +43,10 @@ function LoginForm(props) {
         }
       }) 
       
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log('hi');
+        // console.log(error)
+      })
   };
 
   const handleLogin = (event) => {
@@ -75,13 +78,27 @@ function LoginForm(props) {
               {[
                 'danger',
               ].map((variant) => (
-                <Alert key={variant} variant={variant} mt-2>
+                <Alert key={variant} variant={variant} className="mt-3">
                   The Username or Password is invalid!
                 </Alert>
               ))}
             </>)
+            .catch((error) => {
+              console.log(error)
+              console.log('test')
+              setError(<>
+                {[
+                  'danger',
+                ].map((variant) => (
+                  <Alert key={variant} variant={variant} className="mt-3">
+                    The Username or Password is invalid!
+                  </Alert>
+                ))}
+              </>)
+            })
           }
-        });        
+        })
+              
     }
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -106,7 +123,7 @@ function LoginForm(props) {
           <Form.Control type="password" placeholder="Password" value={password} onChange={(event) => {setPassword(event.target.value)}} />
         </Form.Group>
 
-        <Button variant="primary" type="submit" onClick={(event) => {handleLogin(event)}}>
+        <Button mb-3 variant="primary" type="submit" onClick={(event) => {handleLogin(event)}}>
           Submit
         </Button>
         <br/>

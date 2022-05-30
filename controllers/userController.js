@@ -30,6 +30,7 @@ router.get("/seed", async (req, res) => {
       username: "Joy Kwok",
       email: "hi123@gmail.com",
       password: bcrypt.hashSync("12345", saltRounds),
+      contact: "91234567"
     },
     {
       username: "Ivan Leong",
@@ -102,11 +103,14 @@ router.post("/login", async (req, res) => {
         .cookie("NewCookie", newToken, { path: "/", httpOnly: true })
         .send({ "jwt": newToken, "successful": true, "username": findUserName.username });
     } else {
-      // res.status(403).send({ "sucessful": false });
+      res.status(403).send({ "sucessful": false });
       console.log("user does not exist")
     }
   }
-  // } else { console.log("user does not exist") }
+  else { 
+    res.status(403).send({ "sucessful": false });
+    console.log("user does not exist") 
+  }
 });
 
 

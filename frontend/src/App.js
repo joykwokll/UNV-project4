@@ -23,6 +23,7 @@ import Secret from "./views/Routes/Profile/Secret"
 import Loggedin from "./views/Routes/Profile/Loggedin"
 import {useState} from 'react';
 import Appointments from "./views/Routes/Profile/Appointments/Appointments";
+import ResetPassword from "./views/Routes/Profile/ResetPassword";
 
 
 function App() {
@@ -65,6 +66,10 @@ function App() {
                 element={< RegisterForm />} > </Route>
             <Route path="loggedin"
                 element={< Loggedin isLoggedIn={isLoggedIn}/>} > </Route>
+                {/* <Route path="resetPassword" */}
+                <Route path = "resetPassword/:id/:resetString"
+                /*{redirectURL + "/" + _id + "/" + resetString}*/
+                element={< ResetPassword />} > </Route>
             <Route path="appointments"
                 element={< Appointments />} > </Route>
             <Route path="contactus"

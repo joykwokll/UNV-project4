@@ -29,7 +29,7 @@ function LoginForm(props) {
         'Accept': 'application/json',
       },
       body: JSON.stringify({
-        redirectURL : window.location.origin,
+        redirectURL : window.location.origin + ("/resetPassword"),
         email: forgetEmail
       })
     })

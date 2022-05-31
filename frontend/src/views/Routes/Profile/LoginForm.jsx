@@ -29,7 +29,7 @@ function LoginForm(props) {
         'Accept': 'application/json',
       },
       body: JSON.stringify({
-        redirectURL : "google.com",
+        redirectURL : window.location.origin,
         email: forgetEmail
       })
     })

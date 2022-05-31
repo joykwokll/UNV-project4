@@ -16,6 +16,7 @@ const res = require("express/lib/response");
 //Nodemailer
 const nodemailer = require("nodemailer");
 const { find } = require('../models/Users');
+const { resetWatchers } = require('nodemon/lib/monitor/watch');
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -137,21 +138,74 @@ router.post("/passwordreset", (req, res) => {
 })
 
 
-//Sen√çd password reset email
-const sentResetEmail = ({ password, email, _id }, redirectURL, res) => {
+//Send password reset email
+const sentResetEmail = ({ username, password, email, _id }, redirectURL, res) => {
   const resetString = uuidv4 + _id;
 
   PasswordReset
-    .deleteMany({ password: password })
+    .deleteMany({ userId: _id })
     .then(result => {
       const mailOptions = {
         from: process.env.AUTH_EMAIL,
         to: email,
         subject: "Reset your password",
-        html: `<p>Please reset your password here</p> 
-        <p>This link <b>expires in 60 minutes</b>.</p> <p>Press <a href = ${redirectURL + "/" + _id + "/" + resetString
-          }>here</a> to proveed.</p>`,
+        html: `<h3>Hi ${username},</h3> <p>Forgot your password? No worries. Just click the link below to reset your password.</p> 
+        <p>This link <b>expires in 60 minutes</b>.</p> <p>Press <a href = ${redirectURL + "/" + _id + "/" + resetString }>
+        here</a> to proceed.</p>
+          <br/>
+          <p>Sincerely, </p>
+          <p><i>UNV Aesthetics</i></p>`,
       };
+
+      //hash the reset string
+
+      const saltRounds = 10;
+      bcrypt
+      .hash(resetString, saltRounds)
+      .then(hashedResetString => {
+        const newPasswordReset = new PasswordReset ({
+          userId: _id,
+          resetString: hashedResetString,
+          createdAt: Date.now(),
+          expiresAt: Date.now() + 3600000
+        });
+        
+        newPasswordReset
+        .save()
+        .then(() => {
+          transporter
+          .sendMail(mailOptions)
+          .then(() => {
+            res.json({
+              status: "PENDING",
+              message: "Password reset email sent"
+            })
+          })
+          .catch(error => {
+            console.log(error);
+            res.json({
+              status: "FAILED",
+              message: "Password reset email failed",
+            })
+          })
+
+        })
+        .catch((error => {
+          console.log(error);
+          res.json({
+            status: "FAILED",
+            message: "Couldnt save password"
+          })
+        }))
+      })
+      .catch(error => {
+        console.log(error);
+        res.json({
+          status: "FAILED",
+          message: "An error occured while hashing",
+        })
+      })
+
       transporter
         .sendMail(mailOptions)
         .then(() => {
@@ -173,58 +227,6 @@ const sentResetEmail = ({ password, email, _id }, redirectURL, res) => {
 }
 
 
-// //Create route for login
-// router.post("/login", async (req, res) => {
-//   console.log("body", req.body);
-//   try {
-//     const findUserName = await User.findOne({ username: req.body.username }); //req.body.username
-//     console.log("findUsername", findUserName);
-//     if (findUserName) {
-//       const hashPassword = bcrypt.hashSync(req.body.password, saltRounds);
-//       // check user password with hashed password stored in the database
-//       const validPassword = await bcrypt.compare(
-//         req.body.password,
-//         findUserName.password
-//       );
-//       console.log("valid password", validPassword);
-//       // const validPassword = await bcrypt.compare("TEST", bcrypt.hashSync("TEST",bcrypt.genSaltSync(10)));
-
-//       if (validPassword) {
-//         req.session.currentUser = findUserName.username;
-//         req.session.isAuthenticated = true;
-//         req.session.count = 1;
-//         console.log(req.session);
-//         //   res.redirect("/")
-//         res.status(200).json({ message: "Valid password", session: req.session });
-//       } else {
-//         res.status(400).json({ error: "Invalid Password" });
-//       }
-//     } else {
-//       res.status(401).json({ error: "User does not exist" });
-//     }
-
-//     console.log(findUserName);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
-// //Create route for new user stock holdings
-// router.post("/newUser/:username", async (req, res) => {
-//   try {
-//     const createdStockHoldings = await StockHoldings.create(
-//       {
-//         username: req.params.username,
-//         purchaseLog: [],
-//         cashBalance: 10000,
-//         stockBalance: [],
-//       }
-//     );
-//     createdStockHoldings.save().then(() => res.status(200).send("Success"));
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// });
 
 module.exports = router;
 

@@ -22,6 +22,7 @@ import ContactUs from "./views/Routes/ContactUs/ContactUs";
 import Secret from "./views/Routes/Profile/Secret"
 import Loggedin from "./views/Routes/Profile/Loggedin"
 import {useState} from 'react';
+import Appointments from "./views/Routes/Profile/Appointments/Appointments";
 
 
 function App() {
@@ -64,6 +65,8 @@ function App() {
                 element={< RegisterForm />} > </Route>
             <Route path="loggedin"
                 element={< Loggedin isLoggedIn={isLoggedIn}/>} > </Route>
+            <Route path="appointments"
+                element={< Appointments />} > </Route>
             <Route path="contactus"
                 element={< ContactUs />} > </Route>
             <Route path="joinus"

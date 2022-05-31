@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { useNavigate } from "react-router-dom";
 
 
 function Profile(props) {
@@ -19,30 +20,27 @@ function Profile(props) {
         setUsername(loggedUser);
     }, [isLoggedIn]);
 
-    let loggedoutUser = () => {
-        sessionStorage.removeItem("username")
-        sessionStorage.removeItem("jwt")
+    // let loggedoutUser = () => {
+    //     sessionStorage.removeItem("username")
+    //     sessionStorage.removeItem("jwt")
     
-      }
+    //   }
+
+   
+  let navigate = useNavigate();
+
+    const editProfile = () => {
+        navigate("/profileUpdate");
+    }
 
 
   return (
-    <Container>
-      <Row>
-        <Col> <div className="profile">
-          <h3>Hi! {username} <Button variant="outline-dark" size="sm" onClick={loggedoutUser} >Edit profile</Button></h3>  
-          <p>Make an appointment! </p>
-          <Calendar />
+      <Container>
+      <Row className="text-center"><h1>Welcome to UNV</h1></Row>
+      <Row className="text-center"><h2>Rejuvenate Your Skin With UNV Now!</h2> </Row>
+      <Row className="text-center"><h3>Hi! {username} <Button variant="outline-dark" size="sm" onClick={editProfile} >Edit profile</Button></h3> </Row>
 
-          
-
-    
-        </div></Col>
-
-
-   
-      </Row>
-    </Container>
+      </Container>
 
   );
 }

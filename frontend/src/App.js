@@ -24,6 +24,7 @@ import Loggedin from "./views/Routes/Profile/Loggedin"
 import {useState} from 'react';
 import Appointment from "./views/Routes/Profile/Appointment/Appointment";
 import ResetPassword from "./views/Routes/Profile/ResetPassword";
+import LoggedinProfile from "./views/Routes/Profile/LoggedinProfile/LoggedinProfile"
 
 
 function App() {
@@ -72,10 +73,13 @@ function App() {
                 element={< ResetPassword />} > </Route>
             <Route path="appointment"
                 element={< Appointment />} > </Route>
+            <Route path="loggedinprofile"
+                element={< LoggedinProfile />} > </Route>
             <Route path="contactus"
                 element={< ContactUs />} > </Route>
             <Route path="joinus"
                 element={< JoinUs />} > </Route>
+                
 
         </Routes>
     

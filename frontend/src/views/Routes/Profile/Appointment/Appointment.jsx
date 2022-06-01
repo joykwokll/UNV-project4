@@ -29,7 +29,7 @@ function Appointments(props) {
     const handleAppointment = (event) => {
         event.preventDefault();
         console.log("submitted")
-        fetch("/api/users/appointment", {
+        fetch("/api/appointment/appointment", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -44,13 +44,11 @@ function Appointments(props) {
               beautician: beautician 
             })
         })
+        
             .then((res) => {
-              console.log("response2",res)
-              return res.json()
-            })
-            .then((data) => {
-              console.log("data",data)
-               if (data.status === "SUCCESS") {
+              console.log(res)
+              if (res.status === 200) 
+                {
                 setError(<>
                   {[
                     'success',
@@ -60,19 +58,7 @@ function Appointments(props) {
                     </Alert>
                   ))}
                 </>)
-              }
-              else {
-                
-                  setError(<>
-                   {[ 
-                    'danger',
-                  ].map((variant) => ( 
-                    <Alert key={variant} variant={variant} className="mt-3">
-                      Please try again later.
-                    </Alert>
-                  ))}
-                </>)
-                }}
+              }}
             )
                   
           }
@@ -125,21 +111,15 @@ function Appointments(props) {
                             <Form.Control type="beautician" value={beautician} onChange={(event) => {setBeautician(event.target.value)}}/>
                         </Form.Group>
 
-
-
-
-
-                        {/* <Button mb-3 variant="primary" type="submit" onClick={(event) => {handleLogin(event)}}> */}
-                        {/* onClick={(event) => {(event)}} */}
                         <Button mb-3 variant="primary" type="submit" onClick={(event) => {handleAppointment(event)}}>
                             Make Appointment
                         </Button>
                         <br />
-
+                        {error}
                     </Form>
                 </Col>
             </Row>
-            {error}
+           
         </Container>
 
     );

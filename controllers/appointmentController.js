@@ -13,6 +13,21 @@ dotenv.config();
 // const { v4: uuidv4 } = require("uuid");
 // const res = require("express/lib/response");
 
+
+
+//Get route
+router.get("/", (req, res) => {
+    AppointmentDetails.find()
+      .then((data) => {
+        res.send(data);
+        console.log("dataappt", data)
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
+//Create appointment route
 router.post("/appointment", async (req, res) => {
 
     const body = req.body;

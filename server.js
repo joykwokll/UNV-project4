@@ -10,6 +10,7 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 // const pg = require('pg');
 const UserController = require("./controllers/userController")
+const AppointmentController = require("./controllers/appointmentController")
 
 const PORT = process.env.PORT ?? 5000;
 const mongoURI = process.env.MONGO_URI;
@@ -47,6 +48,7 @@ const configs = {
 
 app.use(express.json());
 app.use("/api/users", UserController);
+app.use("/api/appointment", AppointmentController);
 
 app.use(express.static("./frontend/build"));
 

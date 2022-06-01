@@ -48,7 +48,7 @@ const configs = {
 
 app.use(express.json());
 app.use("/api/users", UserController);
-app.use("/api/appointment", AppointmentController);
+app.use("/api/users/", AppointmentController);
 
 app.use(express.static("./frontend/build"));
 

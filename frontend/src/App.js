@@ -22,7 +22,7 @@ import ContactUs from "./views/Routes/ContactUs/ContactUs";
 import Secret from "./views/Routes/Profile/Secret"
 import Loggedin from "./views/Routes/Profile/Loggedin"
 import {useState} from 'react';
-import Appointments from "./views/Routes/Profile/Appointments/Appointments";
+import Appointment from "./views/Routes/Profile/Appointment/Appointment";
 import ResetPassword from "./views/Routes/Profile/ResetPassword";
 
 
@@ -70,8 +70,8 @@ function App() {
                 <Route path = "resetPassword/:id/:resetString"
                 /*{redirectURL + "/" + _id + "/" + resetString}*/
                 element={< ResetPassword />} > </Route>
-            <Route path="appointments"
-                element={< Appointments />} > </Route>
+            <Route path="appointment"
+                element={< Appointment />} > </Route>
             <Route path="contactus"
                 element={< ContactUs />} > </Route>
             <Route path="joinus"

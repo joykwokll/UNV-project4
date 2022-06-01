@@ -52,7 +52,7 @@ function HeaderBar(props) {
                 ? (
                   <NavDropdown title={username} id="collasible-nav-dropdown">
                     <NavDropdown.Item as={Link} to="/profileUpdate">Profile</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/appointments">Appointments</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/appointment">Appointments</NavDropdown.Item>
                     <NavDropdown.Item>
                       <span onClick={loggedoutUser}>Log Out</span>
                       </NavDropdown.Item>

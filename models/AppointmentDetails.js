@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const appointmentSchema = new Schema({
-    Username: {type: String},
-    Date: Date,
-    Time: {type: String},
-    Outlet: {type: String},
-    Services: {type: String}
+    username: {type: String},
+    date: Date,
+    time: {type: String},
+    outlet: {type: String},
+    services: {type: String},
+    beautician: {type: String}
 });
 
 const AppointmentDetails = mongoose.model("appointment-details", appointmentSchema);

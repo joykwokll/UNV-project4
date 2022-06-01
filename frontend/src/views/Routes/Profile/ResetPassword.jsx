@@ -45,7 +45,7 @@ function ResetPassword(props) {
         })
         .then((data) => {
           console.log("data",data)
-           if (data.successful) {
+           if (data.status === "SUCCESS") {
             setError(<>
               {[
                 'success',
@@ -55,20 +55,19 @@ function ResetPassword(props) {
                 </Alert>
               ))}
             </>)
-            .catch((error) => {
-              console.log(error)
-              console.log('test')
-              setError(<>
-                {[ 
-                  'danger',
-                ].map((variant) => ( 
-                  <Alert key={variant} variant={variant} className="mt-3">
-                    Password and Confirm password does not match! Please re-enter.
-                  </Alert>
-                ))}
-              </>)
-            })
           }
+          else {
+            if (newPassword !== cfmNewPassword) {
+              setError(<>
+               {[ 
+                'danger',
+              ].map((variant) => ( 
+                <Alert key={variant} variant={variant} className="mt-3">
+                  Password and Confirm password does not match! Please re-enter.
+                </Alert>
+              ))}
+            </>)
+            }}
         })
               
       }
@@ -102,6 +101,7 @@ function ResetPassword(props) {
             <Button mb-3 variant="primary" type="submit" onClick={(event) => {handleResetPassword(event)}}>
               Change Password
             </Button>
+            {error}
             <br />
 
           </Form>

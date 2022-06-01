@@ -198,11 +198,9 @@ const sentResetEmail = ({ username, password, email, _id }, redirectURL, res) =>
 
 //Resetting the password here
 router.post("/resetPassword", (req, res) => {
-  let { userId, resetString, newPassword } = req.body;
-  console.log("testpost")
-
+  let { _id, resetString, newPassword } = req.body;
   PasswordReset
-    .find({ userId })
+    .find({ userId: _id })
     .then(result => {
       if (result.length > 0) {
         //password reset record exists
@@ -238,20 +236,20 @@ router.post("/resetPassword", (req, res) => {
             .then((result) => {
               if (result) {
 
-                //string matched, hasing password
+                //string matched, hashing password
 
                 const saltRounds = 10;
                 bcrypt
                   .hash(newPassword, saltRounds)
                   .then(hashedNewPassword => {
                     //update user password
-
+                    console.log('hashedNewPassword', hashedNewPassword);
                     User
-                      .updateOne({ _id: userId }, { password: hashedNewPassword })
+                      .updateOne({ _id }, { $set: { password: hashedNewPassword } })
                       .then(() => {
                         //update complete. 
                         PasswordReset
-                          .deleteOne({ userId })
+                          .findOneAndDelete({ userId: _id })
                           .then(() => {
                             res.json({
                               status: "SUCCESS",

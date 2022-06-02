@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, Container, Row, Col, ListGroup, Modal, Form, Button } from "react-bootstrap";
+import { Card, Container, Row, Col, ListGroup, Modal, Form, Button, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState, useEffect } from 'react'
 
@@ -9,8 +9,11 @@ function LoggedinProfile(props) {
 
   const [error, setError] = useState();
   const [show, setShow] = useState(false);
+  const [deleteShow, setDeleteShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleDeleteClose = () => setDeleteShow(false);
+  const handleDeleteShow = () => setDeleteShow(true);
   const [appointmentDetails, setAppointmentDetails] = useState({
     date: "",
     outlet: "",
@@ -45,65 +48,90 @@ function LoggedinProfile(props) {
     console.log(appointmentDetails)
   }, [appointmentDetails])
 
-  // //UPDATE ROUTE
-  // const handleUpdateAppt = (event) => {
-  //   let username = sessionStorage.getItem("username")
-  //   event.preventDefault();
-  //   console.log("submitted")
-  //   fetch("/api/appointment/updateappointment", {
-  //       method: "POST",
-  //       headers: {
-  //           'Content-Type': 'application/json',
-  //           'Accept': 'application/json',
-  //           'username': username
-  //       },
-  //       body: JSON.stringify({ 
-  //         username: username, 
-  //         date: date,
-  //         time: time,
-  //         outlet: outlet,
-  //         services: services,
-  //         beautician: beautician 
-  //       })
-  //   })
-  //       .then((res) => {
-  //         console.log(res)
-  //         if (res.status === 200) 
-  //           {
-  //           setError(<>
-  //             {[
-  //               'success',
-  //             ].map((variant) => (
-  //               <Alert key={variant} variant={variant} className="mt-3">
-  //                 Updates have been saved~
-  //               </Alert>
-  //             ))}
-  //           </>)
-  //         }}
-  //       )
-              
-  //     }
+  //UPDATE ROUTE
+  const handleUpdateAppt = (event) => {
+    console.log("eventupdatesubmitted")
+    event.preventDefault();
+    console.log("updatesubmitted")
+    fetch("/api/appointment/updateappointment", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify(appointmentDetails)
+    })
+        .then((res) => {
+          console.log(res)
+          if (res.status === 200) 
+            {
+            setError(<>
+              {[
+                'success',
+              ].map((variant) => (
+                <Alert key={variant} variant={variant} className="mt-1 mx-2 text-center">
+                  <div className="text-center">
+                  Updates have been saved~
+                  </div>
+                </Alert>
+              ))}
+            </>)
+          }}
+        )
+      }
 
+      // //DELETE ROUTE
+      // const deleteAppointment = (event) => {
+      //   console.log("eventupdatesubmitted")
+      //   event.preventDefault();
+      //   console.log("updatesubmitted")
+      //   fetch("/api/appointment/updateappointment", {
+      //       method: "POST",
+      //       headers: {
+      //           'Content-Type': 'application/json',
+      //           'Accept': 'application/json',
+      //       },
+      //       body: JSON.stringify(appointmentDetails)
+      //   })
+      //       .then((res) => {
+      //         console.log(res)
+      //         if (res.status === 200) 
+      //           {
+      //           setError(<>
+      //             {[
+      //               'success',
+      //             ].map((variant) => (
+      //               <Alert key={variant} variant={variant} className="mt-1 mx-2 text-center">
+      //                 <div className="text-center">
+      //                 Updates have been saved~
+      //                 </div>
+      //               </Alert>
+      //             ))}
+      //           </>)
+      //         }}
+      //       )
+      //     }
+    
   return (
     <Container>
-      <Row>
-        <Col sm={8}> <div className="profile">
+      <Row className="mt-3">
+        <Col sm={8} > <div className="profile mx-auto w-75 ">
           <h3>Your healthy skin starts today</h3>
           <p>A journey to your healthy skin starts with the first step, and the first step in making a simple decision
             to give us an opportunity to serve you. Do fill in your details below to give us this chance!</p>
         </div></Col>
 
-        {/* {handleLoggedinProfile} */}
         <Card style={{ width: '18rem' }}>
           <Card.Body>
             <Card.Title>Your Next Appointment</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">Appointment Details</Card.Subtitle>
             <ListGroup variant="flush">
-              <ListGroup.Item>Date: {appointmentDetails.date.slice(0, 10)}</ListGroup.Item>
+              {appointmentDetails.date && <> 
+              <ListGroup.Item>Date: {appointmentDetails.date.slice(0, 10)}</ListGroup.Item> 
               <ListGroup.Item>Time: {appointmentDetails.time}</ListGroup.Item>
               <ListGroup.Item>Outlet: {appointmentDetails.outlet}</ListGroup.Item>
               <ListGroup.Item>Services: {appointmentDetails.services}</ListGroup.Item>
-              <ListGroup.Item>Beautician: {appointmentDetails.beautician}</ListGroup.Item>
+              <ListGroup.Item>Beautician: {appointmentDetails.beautician}</ListGroup.Item></>}
 
             </ListGroup>
 
@@ -111,7 +139,7 @@ function LoggedinProfile(props) {
               Update your Appointment
             </Button>
 
-            <Button mt-3 variant="outline-warning" size="sm" onClick={handleShow}>
+            <Button mt-3 variant="outline-warning" size="sm" onClick={handleDeleteShow}>
               Delete your Appointment
             </Button>
           </Card.Body>
@@ -119,6 +147,7 @@ function LoggedinProfile(props) {
 
         <Col sm={4}>
 
+          {/*Edit appointment Modal  */}
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Edit your details here~</Modal.Title>
@@ -200,13 +229,35 @@ function LoggedinProfile(props) {
                 Close
               </Button>
 
-              <Button variant="primary" onClick={(event) => {handleClose(event)}} >
-              {/* handleUpdateAppt */}
+              <Button variant="primary" onClick={(event) => {handleUpdateAppt(event)}}>
                 Update Edits
               </Button>
+            </Modal.Footer>
+            {error}
+          </Modal>
 
+          {/*Delete appointment Modal*/}
+          <Modal show={deleteShow} onHide={handleDeleteClose}>
+            <Modal.Header closeButton>
+            <Modal.Title>Are you sure you want to delete your appointment?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <span><b>This action cannot be undone.</b></span>
+            </Modal.Body>
+            <Modal.Footer>
+             
+            <Button className="mr-3"variant="danger" onClick={(event) => {handleDeleteClose()}}>
+                Yes
+              </Button>
+
+              <Button variant="info" onClick={handleDeleteClose}>
+                No
+              </Button>
+           
             </Modal.Footer>
           </Modal>
+
+          
         </Col>
       </Row>
     </Container>

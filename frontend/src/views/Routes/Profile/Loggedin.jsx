@@ -30,7 +30,7 @@ function Profile(props) {
   let navigate = useNavigate();
 
     const editProfile = () => {
-        navigate("/profileUpdate");
+        navigate("/loggedinprofile");
     }
 
 

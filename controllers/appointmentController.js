@@ -37,19 +37,19 @@ router.post("/appointment", async (req, res) => {
     }
   });
 
-//   //Update appointment route
-// router.post("/updateappointment", async (req, res) => {
-//   const body = req.body;
-//   console.log("body", body);
-//   try {
-//     console.log(body);
-//     const updateAppt = await AppointmentDetails.findOneAndUpdate({username: req.headers.username});
-//     updateAppt.save().then(() => res.status(200).send("Success"));
+  //Update appointment route
+router.post("/updateappointment", async (req, res) => {
+  const body = req.body;
+  console.log("body", body);
+  try {
+    console.log(body);
+    const updateAppt = await AppointmentDetails.findOneAndUpdate({username: req.body.username}, req.body);
+    updateAppt.save().then(() => res.status(200).send("Success"));
 
-//   } catch (error) {
-//     res.status(400).json({ error: error.message });
-//   }
-// });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 
   

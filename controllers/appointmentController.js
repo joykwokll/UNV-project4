@@ -18,6 +18,7 @@ router.get("/seed", async (req, res) => {
   const appointmentsSeed = [
     {
       username: "Joy Kwok",
+      date: Date.now(),
       time: "time",
       outlet: "Jurong East",
       services: "Pigmentation",
@@ -25,6 +26,7 @@ router.get("/seed", async (req, res) => {
     },
     {
       username: "Ivan Leong",
+      date: Date.now(),
       time: "time",
       outlet: "Tanjong Pagar",
       services: "Sensitive Skin",
@@ -76,7 +78,7 @@ router.post("/updateappointment", async (req, res) => {
 //Delete route
 router.delete("/:username", async (req, res) => {
   const deletedAppointment = await AppointmentDetails.findOneAndDelete({
-    username: req.params.username,
+    username: req.headers.username,
   });
 
   res.json(deletedAppointment);

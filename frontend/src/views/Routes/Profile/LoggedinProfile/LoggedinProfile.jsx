@@ -80,37 +80,37 @@ function LoggedinProfile(props) {
         )
       }
 
-      // //DELETE ROUTE
-      // const deleteAppointment = (event) => {
-      //   console.log("eventupdatesubmitted")
-      //   event.preventDefault();
-      //   console.log("updatesubmitted")
-      //   fetch("/api/appointment/updateappointment", {
-      //       method: "POST",
-      //       headers: {
-      //           'Content-Type': 'application/json',
-      //           'Accept': 'application/json',
-      //       },
-      //       body: JSON.stringify(appointmentDetails)
-      //   })
-      //       .then((res) => {
-      //         console.log(res)
-      //         if (res.status === 200) 
-      //           {
-      //           setError(<>
-      //             {[
-      //               'success',
-      //             ].map((variant) => (
-      //               <Alert key={variant} variant={variant} className="mt-1 mx-2 text-center">
-      //                 <div className="text-center">
-      //                 Updates have been saved~
-      //                 </div>
-      //               </Alert>
-      //             ))}
-      //           </>)
-      //         }}
-      //       )
-      //     }
+      //DELETE ROUTE
+      const deleteAppointment = (event) => {
+        let username = sessionStorage.getItem("username")
+        console.log("eventupdatesubmitted")
+        event.preventDefault();
+        fetch("/api/appointment/:username", {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                'username' : username
+            },
+        })
+        
+            .then((res) => {
+              console.log(res)
+              if (res.status === 200) 
+                {
+                setError(<>
+                  {[
+                    'danger',
+                  ].map((variant) => (
+                    <Alert key={variant} variant={variant} className="mt-1 mx-2 text-center">
+                      <div className="text-center">
+                      Appointment deleted.
+                      </div>
+                    </Alert>
+                  ))}
+                </>)
+              }}
+            )
+          }
     
   return (
     <Container>
@@ -246,7 +246,7 @@ function LoggedinProfile(props) {
             </Modal.Body>
             <Modal.Footer>
              
-            <Button className="mr-3"variant="danger" onClick={(event) => {handleDeleteClose()}}>
+            <Button className="mr-3"variant="danger" onClick={(event) => {deleteAppointment(event)}}>
                 Yes
               </Button>
 
@@ -255,6 +255,7 @@ function LoggedinProfile(props) {
               </Button>
            
             </Modal.Footer>
+            {error}
           </Modal>
 
           

@@ -12,13 +12,14 @@ function LoggedinProfile(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [appointmentDetails, setAppointmentDetails] = useState({
-    date: "               ",
+    date: "",
     outlet: "",
     services: "",
     time: "",
     username: ""
   });
 
+  //GET ROUTE
   const handleLoggedinProfile = () => {
     let username = sessionStorage.getItem("username")
     console.log("submitted")
@@ -44,6 +45,44 @@ function LoggedinProfile(props) {
     console.log(appointmentDetails)
   }, [appointmentDetails])
 
+  // //UPDATE ROUTE
+  // const handleUpdateAppt = (event) => {
+  //   let username = sessionStorage.getItem("username")
+  //   event.preventDefault();
+  //   console.log("submitted")
+  //   fetch("/api/appointment/updateappointment", {
+  //       method: "POST",
+  //       headers: {
+  //           'Content-Type': 'application/json',
+  //           'Accept': 'application/json',
+  //           'username': username
+  //       },
+  //       body: JSON.stringify({ 
+  //         username: username, 
+  //         date: date,
+  //         time: time,
+  //         outlet: outlet,
+  //         services: services,
+  //         beautician: beautician 
+  //       })
+  //   })
+  //       .then((res) => {
+  //         console.log(res)
+  //         if (res.status === 200) 
+  //           {
+  //           setError(<>
+  //             {[
+  //               'success',
+  //             ].map((variant) => (
+  //               <Alert key={variant} variant={variant} className="mt-3">
+  //                 Updates have been saved~
+  //               </Alert>
+  //             ))}
+  //           </>)
+  //         }}
+  //       )
+              
+  //     }
 
   return (
     <Container>
@@ -52,9 +91,6 @@ function LoggedinProfile(props) {
           <h3>Your healthy skin starts today</h3>
           <p>A journey to your healthy skin starts with the first step, and the first step in making a simple decision
             to give us an opportunity to serve you. Do fill in your details below to give us this chance!</p>
-          {/* <button className="button mb-2" onClick={handleLogin}>Login</button>
-          <br /> */}
-          <button className="button" onClick={handleLoggedinProfile}>test</button>
         </div></Col>
 
         {/* {handleLoggedinProfile} */}
@@ -94,9 +130,9 @@ function LoggedinProfile(props) {
                   <Form.Control
                     type="date"
                     placeholder="Date"
-                  // value={forgetEmail}
-                  // onChange={event => setForgetEmail(event.target.value)}
-                  // autoFocus
+                    value={appointmentDetails.date}
+                    onChange={event => setAppointmentDetails({...appointmentDetails, date: event.target.value})}
+                    autoFocus
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -104,28 +140,39 @@ function LoggedinProfile(props) {
                   <Form.Control
                     type="time"
                     placeholder="Time"
-                  // value={forgetEmail}
-                  // onChange={event => setForgetEmail(event.target.value)}
-                  // autoFocus
+                    value={appointmentDetails.time}
+                    onChange={event => setAppointmentDetails({...appointmentDetails, time: event.target.value})}
+                    autoFocus
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                   <Form.Label>Outlet</Form.Label>
-                  <Form.Select aria-label="Default select example" >
+                  <Form.Select aria-label="Default select example" 
+                  type="outlet"
+                  value={appointmentDetails.outlet}
+                  onChange={event => setAppointmentDetails({...appointmentDetails, outlet: event.target.value})}
+                  autoFocus>
                     <option>Choose One</option>
                     <option value="Jurong East">Jurong East</option>
                     <option value="Tanjong Pagar">Tanjong Pagar</option>
+                    
                   </Form.Select>
 
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                   <Form.Label>Services</Form.Label>
-                  <Form.Select aria-label="Default select example" >
+                  <Form.Select aria-label="Default select example" 
+                    type="services"
+                    placeholder="Time"
+                    value={appointmentDetails.services}
+                    onChange={event => setAppointmentDetails({...appointmentDetails, services: event.target.value})}
+                    autoFocus>
                     <option>Treatment Services</option>
                     <option value="Anti Aging">Anti Aging</option>
                     <option value="Pigmentation">Pigmentation</option>
                     <option value="Sensitive Skin">Sensitive Skin</option>
                     <option value="Pimple">Pimple</option>
+              
                   </Form.Select>
                   {/* value={services} onChange={(event) => { setServices(event.target.value) } */}
 
@@ -133,11 +180,11 @@ function LoggedinProfile(props) {
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                   <Form.Label>Beautician</Form.Label>
                   <Form.Control
-                    type="outlet"
-                    placeholder="Beautician Preffered"
-                  // value={forgetEmail}
-                  // onChange={event => setForgetEmail(event.target.value)}
-                  // autoFocus
+                  type="beautician"
+                  placeholder="Beautician preferred"
+                  value={appointmentDetails.beautician}
+                  onChange={event => setAppointmentDetails({...appointmentDetails, beautician: event.target.value})}
+                  autoFocus
                   />
 
                 </Form.Group>
@@ -153,11 +200,10 @@ function LoggedinProfile(props) {
                 Close
               </Button>
 
-              <Button variant="primary" >
-                Update edits
+              <Button variant="primary" onClick={(event) => {handleClose(event)}} >
+              {/* handleUpdateAppt */}
+                Update Edits
               </Button>
-
-              {/* onClick={(event) => {resetPassword(event)}} */}
 
             </Modal.Footer>
           </Modal>

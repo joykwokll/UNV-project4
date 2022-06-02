@@ -16,15 +16,10 @@ dotenv.config();
 
 
 //Get route
-router.get("/", (req, res) => {
-    AppointmentDetails.find()
-      .then((data) => {
-        res.send(data);
-        console.log("dataappt", data)
-      })
-      .catch((err) => {
-        res.json(err);
-      });
+router.get("/", async (req, res) => {
+    const appointmentDetail = await AppointmentDetails.findOne({username: req.headers.username})
+    console.log("User FOUND",appointmentDetail)
+    res.send({appointmentDetail});
   });
 
 //Create appointment route

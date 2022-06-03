@@ -22,7 +22,7 @@ function Home(props) {
         <Row>
 
           <Col className="wrapper"> <div>
-          <img src={homebg} alt="sunshine" width="1600" height="800" style={{'vertical-align': 'middle', 'margin': '-25px 0px 0px -155px'}}/>
+          <img src={homebg} alt="sunshine" width="1600" height="800" style={{'vertical-align': 'middle', 'margin': '-40px 0px 0px -155px'}}/>
             {/* <Image className="mx-auto d-block" src={homebg} />{" "} */}
             <p style={{'margin': '-155px 0px 0px -355px'}} className="textinfront">
             <h3>

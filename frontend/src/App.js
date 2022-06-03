@@ -26,6 +26,7 @@ import Appointment from "./views/Routes/Profile/Appointment/Appointment";
 import ResetPassword from "./views/Routes/Profile/ResetPassword";
 import LoggedinProfile from "./views/Routes/Profile/LoggedinProfile/LoggedinProfile"
 import Footer from "./views/Footer/Footer"
+import Admin from "./views/Routes/Admin/Admin"
 
 
 function App() {
@@ -80,6 +81,9 @@ function App() {
                 element={< ContactUs />} > </Route>
             <Route path="joinus"
                 element={< JoinUs />} > </Route>
+                
+            <Route path="admin"
+                element={< Admin />} > </Route>
                 
         
         </Routes>

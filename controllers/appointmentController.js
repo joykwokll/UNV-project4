@@ -39,11 +39,18 @@ dotenv.config();
 // });
 
 
-//Get route
+//Get route for customer
 router.get("/", async (req, res) => {
   const appointmentDetail = await AppointmentDetails.findOne({ username: req.headers.username })
   console.log("User FOUND", appointmentDetail)
   res.send({ appointmentDetail });
+});
+
+//Get route for admin
+router.get("/admin", async (req, res) => {
+  const adminAppointmentDetail = await AppointmentDetails.find()
+  console.log("User FOUND", adminAppointmentDetail)
+  res.send({ adminAppointmentDetail });
 });
 
 //Create appointment route

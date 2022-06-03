@@ -21,7 +21,7 @@ function LoggedinProfile(props) {
     time: "",
     username: ""
   });
-  const [userDetails, setUserDetails] = useState({
+  const [userDetail, setUserDetail] = useState({
     username: "",
     email: "",
     contact: ""
@@ -55,7 +55,7 @@ function LoggedinProfile(props) {
 
 
   //USER GET ROUTE
-  const handleUserDetails = () => {
+  const handleUserDetail = () => {
     let username = sessionStorage.getItem("username")
     console.log("submitted")
     fetch("/api/users/", {
@@ -69,17 +69,17 @@ function LoggedinProfile(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log("userdata", data)
-        setUserDetails({ ...userDetails })
+        setUserDetail({ ...data.userDetail })
       })
   }
 
   useEffect(() => {
-    handleUserDetails()
+    handleUserDetail()
   }, [])
 
   useEffect(() => {
-    console.log(userDetails)
-  }, [userDetails])
+    console.log(userDetail)
+  }, [userDetail])
 
 
 
@@ -160,13 +160,13 @@ function LoggedinProfile(props) {
             <br/>
            <h4> Your Profile Details</h4>
            <br/>
-            Username: {userDetails.username} 
+            Username: {userDetail.username} 
             <br/>
             <br/>
-            Email: {userDetails.email}
+            Email: {userDetail.email}
             <br/>
             <br/>
-            Contact: {userDetails.contact}
+            Contact: {userDetail.contact}
        
         </div></Col>
 

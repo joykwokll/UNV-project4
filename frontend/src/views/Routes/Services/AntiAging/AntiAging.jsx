@@ -131,10 +131,8 @@ function AntiAging(props) {
           </Col>
 
         </Row>
-
-        <br />
-        <br />
-        <div class="divider"><span></span><span>THE TREATMENTS</span><span></span></div>
+        <br/>
+        <br/>
         <Row className="align-items-center">
           <Col>
             <Image className="mx-auto d-block" src={treatment2} />{" "}

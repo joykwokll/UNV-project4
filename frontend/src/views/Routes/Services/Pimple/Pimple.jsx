@@ -14,9 +14,14 @@ function Pimple(props) {
 
       <Container className="pt-5">
 
+      <h1 class="heading-1">THE CHALLENGES</h1>
+        <div class="divider-1"> <span></span> </div>
+        <hr/>
+
+
         <Row className="align-items-center">
           <Col xs = {6}>
-            <p><b>THE CHALLENGES</b></p>
+      
             <h3>As teenagers, one of the common skin issues are pimples or commonly known as acnes…</h3>
       
                 {" "}
@@ -41,6 +46,10 @@ function Pimple(props) {
         </Row>
         <br/>
         <br/>
+        <h1 class="heading-1">WE ARE HERE FOR YOU</h1>
+        <div class="divider-1"> <span></span> </div>
+        <hr/>
+
         <Row className="align-items-center">
           <Col>
             <h1>Clear up Your Skin</h1>
@@ -63,10 +72,13 @@ function Pimple(props) {
 
         <br />
         <br />
+        <h1 class="heading-1">THE SOLUTIONS</h1>
+        <div class="divider-1"> <span></span> </div>
+        <hr/>
+
 
         <Row className="align-items-center">
           <Col>
-          <p><b>THE SOLUTIONS</b></p>
             <h3>FOCUS CARETM CLARITY+ RANGE</h3>
             <Card className="aboutintro">
               <Card.Body>
@@ -99,13 +111,15 @@ function Pimple(props) {
         </Row>
 
         <br />
+        <div class="divider"><span></span><span>THE TREATMENTS</span><span></span></div>
 
         <Row className="align-items-center">
         <Col>
             <Image className="mx-auto d-block" src={treatment1}  />{" "}
           </Col>
           <Col>
-            <h1>01: <br/> Environ DF II Treatment</h1>
+          <span>01:</span>
+            <h2> Environ DF II Treatment</h2>
           
                 {" "}
                 The DF II machine uses specific Environ ingredients 

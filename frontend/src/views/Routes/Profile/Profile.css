@@ -1,7 +1,8 @@
 .profile {
-    position: auto;
-    width: 50%;
+    position: center;
+    width: 40%;
     padding: 10px;
+
 }
 
 .button {
@@ -14,6 +15,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    margin-left: 2cm;
 }
 
 .button:hover {

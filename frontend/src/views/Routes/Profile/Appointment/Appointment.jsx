@@ -67,6 +67,8 @@ function Appointments(props) {
 
     return (
         <Container>
+            <hr/>
+        
             <Row>
                 <Col> <div className="appointments">
                     <br />

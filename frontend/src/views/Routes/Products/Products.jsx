@@ -29,6 +29,7 @@ function Products(props) {
 
   return (
     <div>
+       <hr/>
       <Card style={{display: 'flex', flexDirection: 'row'}}>
       <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={AntiAging} />

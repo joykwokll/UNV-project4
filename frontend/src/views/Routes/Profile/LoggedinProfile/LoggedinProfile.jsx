@@ -114,6 +114,8 @@ function LoggedinProfile(props) {
     
   return (
     <Container>
+      <hr/>
+      <br/>
       <Row className="mt-3">
         <Col sm={8} > <div className="profile mx-auto w-75 ">
           <h3>Your healthy skin starts today</h3>

@@ -6,7 +6,7 @@ function JoinUs(props) {
     return (
       <div>
           
-      <p>Join Us</p>
+      <p></p>
       </div>
     );
   }

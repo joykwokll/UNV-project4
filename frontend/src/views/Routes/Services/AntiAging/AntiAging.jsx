@@ -8,11 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./AntiAging.css"
 
 function AntiAging(props) {
+ 
 
   return (
-
     <div>
-
       <Container className="pt-5">
       
         <h1 class="heading-1">THE CHALLENGES</h1>
@@ -38,7 +37,11 @@ function AntiAging(props) {
             dull looking skin. Not only they look 5 - 10 years younger
             their age, they regained their confidence & compliments
             from their love ones.
-
+            <link rel="stylesheet" href="css/animate.css"></link>
+            <script src="js/wow.min.js"></script>
+              <script>
+              new WOW().init();
+              </script>
 
 
           </Col>

@@ -35,11 +35,14 @@ function Profile(props) {
 
 
   return (
+    
       <Container>
-      <Row className="text-center"><h1>Welcome to UNV</h1></Row>
+        <hr/>
+        <br/>
+      <Row className="text-center"><h1>Welcome {username} ~ </h1></Row>
       <Row className="text-center"><h2>Rejuvenate Your Skin With UNV Now!</h2> </Row>
-      <Row className="text-center"><h3>Hi! {username} <Button variant="outline-dark" size="sm" onClick={editProfile} >Edit profile</Button></h3> </Row>
-
+      <Row className="text-center"><h3> <Button variant="outline-dark" size="sm" onClick={editProfile} >Edit profile</Button></h3> </Row>
+      <Row className="text-center"><h3> <Button variant="outline-dark" size="sm" onClick={editProfile} >Make an appointment</Button></h3> </Row>
       </Container>
 
   );

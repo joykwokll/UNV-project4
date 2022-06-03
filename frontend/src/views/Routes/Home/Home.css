@@ -12,3 +12,21 @@
 .button:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)
 };
+
+.homebg {
+  position: auto;
+  right:-50%;
+}
+
+.textinfront {
+position: absolute;
+font-size: 100px;
+left: 50%;
+top: 40%;
+transform: translate(-50%, 50%);
+color: white;
+text-shadow: 3px 3px rgb(255, 137, 26);
+
+-webkit-text-stroke: 1.5px white;
+
+}

@@ -3,18 +3,25 @@ import "./About.css";
 import { Card, Container, Row, Col, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import founder from "./founder.jpg";
-import partner from "./partner.jpeg"
+import partner from "./partner.jpeg";
+import award1 from "./Award1.png";
+import award2 from "./Award2.png";
+import award3 from "./Award3.png";
+
 
 function About(props) {
   return (
     <div>
       <Container className="pt-5">
+      <h1 class="heading-1">The Founder</h1>
+        <div class="divider-1"> <span></span> </div>
+        <hr/>
         <Row className="align-items-center">
           <Col>
             <Image className="mx-auto d-block" src={founder} roundedCircle />{" "}
           </Col>
           <Col xs={8}>
-            <h1>The Founder</h1>
+           
             <Card className="aboutintro">
               <Card.Body>
                 {" "}
@@ -46,6 +53,7 @@ function About(props) {
         </Row>
         <br />
         <br />
+        <div class="divider"><span></span><span>ABOUT</span><span></span></div>
         <Row className="align-middle">
           <Col>
             <h1>About UNV Aesthetics</h1> In 2004, UNV Aesthetics was born. The
@@ -71,11 +79,14 @@ function About(props) {
           <br />
           <br />
           <Row className="align-items-center">
+          <h1 class="heading-1">Our Partner</h1>
+        <div class="divider-1"> <span></span> </div>
+        <hr/>
             <Col>
               <Image className="mx-auto d-block" src={partner} roundedCircle />{" "}
             </Col>
             <Col xs={8}>
-              <h1>Our Partner Dr Des Fernandes</h1>
+              <h1>Dr Des Fernandes</h1>
               <Card>
                 <Card.Body>
                   {" "}
@@ -103,16 +114,36 @@ function About(props) {
                 </Card.Body>
               </Card>
             </Col>
+            </Row>
+            <br />
+        <br />
+        <h1 class="heading-1">Awards</h1>
+        <div class="divider-1"> <span></span> </div>
+        <hr/>
+        
+        <Row>
+        <h1>Our Promise To You</h1>
+        <p>
+        Our success will only be achieved after seeing our satisfied customers regaining back their confidence and happiness. The awards are second to our testaments that we are here for the long term wanting to serve you.
+        <br/>
+        <br/>
+        <br/>
+        </p>
        
         </Row>
-        {/* <Row>
-          <Col>1 of 3</Col>
-          <Col>2 of 3</Col>
-          <Col>3 of 3</Col>
-        </Row> */}
+        <Row align-self-center >
+       
+          <Col md="4">
+              <Image className="mx-auto d-block" src={award1} roundedCircle />{" "}
+            <p><i>Awarded Singapore Heartland Enterprise Star Award 2016/2017/2018 Best Customer Service</i></p>
+            </Col>
+          <Col md="4"><Image className="mx-auto d-block" src={award2} roundedCircle />{" "}
+              <p><i>Received 2012/2013 Singapore Trusted Brand</i></p></Col>
+          <Col md="4"> <Image className="mx-auto d-block" src={award3} roundedCircle />{" "}
+              <p><i>Awarded Asia Pacific Beauty, Slimming & Hair Trusted Brands 2011</i></p></Col>
+        </Row>
       </Container>
     </div>
   );
 }
-
 export default About;

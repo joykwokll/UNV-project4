@@ -9,11 +9,13 @@ function ContactUs(props) {
   return (
 
     <div>
-
+        <div class="divider-1"> <span></span> </div>
+        <hr/>
       <Container className="pt-5">
+      <h1 class="heading-1">LOCATE US</h1>
         <Row className="align-items-center">
           <Col>
-            <p>LOCATE US</p>
+     
             <h1>Jurong East Branch</h1>
             <Image className="mx-auto d-block" src={Jurong} />{" "}
           </Col>

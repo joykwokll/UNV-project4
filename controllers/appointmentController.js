@@ -46,13 +46,6 @@ router.get("/", async (req, res) => {
   res.send({ appointmentDetail });
 });
 
-//Get route for admin
-router.get("/admin", async (req, res) => {
-  const adminAppointmentDetail = await AppointmentDetails.find()
-  console.log("User FOUND", adminAppointmentDetail)
-  res.send({ adminAppointmentDetail });
-});
-
 //Create appointment route
 router.post("/appointment", async (req, res) => {
 

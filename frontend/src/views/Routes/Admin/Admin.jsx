@@ -7,20 +7,14 @@ import { useState, useEffect } from 'react'
 
 function Admin(props) {
 
-    const [adminAppointmentDetail, setAdminAppointmentDetail] = useState({
-        date: "",
-        outlet: "",
-        services: "",
-        time: "",
-        username: ""
-    });
+    const [adminAppointmentDetail, setAdminAppointmentDetail] = useState([]);
 
-    
+
 
     //APPT GET ROUTE
     const handleAdminAppointment = () => {
         console.log("submitted")
-        fetch("/api/appointment/", {
+        fetch("/api/admin/", {
             method: "GET",
             credentials: 'include',
             headers: {
@@ -30,7 +24,7 @@ function Admin(props) {
             .then((response) => response.json())
             .then((data) => {
                 console.log("dataaaaa", data)
-                setAdminAppointmentDetail({ ...data.adminAppointmentDetail })
+                setAdminAppointmentDetail([...data.adminAppointmentDetail])
             })
     }
     useEffect(() => {
@@ -45,29 +39,33 @@ function Admin(props) {
 
     return (
         <div>
-
             <Container className="pt-5">
                 <Row className="align-items-center">
-                    <Col>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Body>
-                                <Card.Title>Recent Appointments Made</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">Appointment Details</Card.Subtitle>
-                                <ListGroup variant="flush">
-                                    {adminAppointmentDetail.date && <>
-                                        <ListGroup.Item>Date: {adminAppointmentDetail.date.slice(0, 10)}</ListGroup.Item>
-                                        <ListGroup.Item>Time: {adminAppointmentDetail.time}</ListGroup.Item>
-                                        <ListGroup.Item>Outlet: {adminAppointmentDetail.outlet}</ListGroup.Item>
-                                        <ListGroup.Item>Services: {adminAppointmentDetail.services}</ListGroup.Item>
-                                        <ListGroup.Item>Beautician: {adminAppointmentDetail.beautician}</ListGroup.Item></>}
+                    {adminAppointmentDetail.map(a => {
+                        return (
+                            <Col>
+                                <Card style={{ width: '18rem' }}>
+                                    <Card.Body>
+                                        <Card.Title>Username: {a.username}</Card.Title>
+                                        <Card.Subtitle className="mb-2 text-muted">Appointment Details</Card.Subtitle>
+                                        <ListGroup variant="flush">
 
-                                </ListGroup>
-                            </Card.Body>
-                        </Card>
+                                            {a.date && <>
+                                                <ListGroup.Item>Date: {a.date.slice(0, 10)}</ListGroup.Item>
+                                                <ListGroup.Item>Time: {a.time}</ListGroup.Item>
+                                                <ListGroup.Item>Outlet: {a.outlet}</ListGroup.Item>
+                                                <ListGroup.Item>Services: {a.services}</ListGroup.Item>
+                                                <ListGroup.Item>Beautician: {a.beautician}</ListGroup.Item></>}
+
+                                        </ListGroup>
+                                    </Card.Body>
+                                </Card>
 
 
 
-                    </Col>
+                            </Col>
+                        )
+                    })}
                 </Row>
 
             </Container>

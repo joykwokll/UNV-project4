@@ -16,7 +16,7 @@
 
 ##  Description
 
-UNV Aesthetics Salon is a well established beauty and wellness brand that is in the market for almost 19 years. It provides first class treatments and have won numerous awards over the years. Their original website does not include an appointment feature and this is where my inspiration and idea came from. 
+UNV Aesthetics Salon is a well established beauty and wellness brand that is in the market for almost 19 years. It provides first class treatments and have won numerous awards over the years. Their original website does not include an appointment feature and this is where my inspiration and idea came from. It is built using MongoDB-Express-React-NodeJs (MERN stack).
 
 ### Technologies Used
 - React: CRA (Front-end)

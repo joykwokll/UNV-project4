@@ -25,6 +25,7 @@ import {useState} from 'react';
 import Appointment from "./views/Routes/Profile/Appointment/Appointment";
 import ResetPassword from "./views/Routes/Profile/ResetPassword";
 import LoggedinProfile from "./views/Routes/Profile/LoggedinProfile/LoggedinProfile"
+import Footer from "./views/Footer/Footer"
 
 
 function App() {
@@ -80,10 +81,11 @@ function App() {
             <Route path="joinus"
                 element={< JoinUs />} > </Route>
                 
-
+        
         </Routes>
-    
+        <Footer/>
         </BrowserRouter>
+        
     );
 }
 export default App;

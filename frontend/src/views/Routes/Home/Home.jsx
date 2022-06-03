@@ -33,6 +33,9 @@ function Home(props) {
             url('https://fonts.googleapis.com/css2?family=Acme&family=Londrina+Solid:wght@300;400&family=Quicksand:wght@300&display=swap');
           </style>
         </div></Col>
+        <br/>
+        <hr/>
+        <br/>
         <Col></Col>
       </Row>
 

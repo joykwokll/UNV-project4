@@ -14,29 +14,29 @@ dotenv.config();
 // const res = require("express/lib/response");
 
 //Seed route
-router.get("/seed", async (req, res) => {
-  const appointmentsSeed = [
-    {
-      username: "Joy Kwok",
-      date: Date.now(),
-      time: "time",
-      outlet: "Jurong East",
-      services: "Pigmentation",
-      beautician: "abcd"
-    },
-    {
-      username: "Ivan Leong",
-      date: Date.now(),
-      time: "time",
-      outlet: "Tanjong Pagar",
-      services: "Sensitive Skin",
-      beautician: "efgh"
-    },
-  ];
-  await AppointmentDetails.deleteMany({});
-  await AppointmentDetails.insertMany(appointmentsSeed);
-  res.json(appointmentsSeed);
-});
+// router.get("/seed", async (req, res) => {
+//   const appointmentsSeed = [
+//     {
+//       username: "Joy Kwok",
+//       date: Date.now(),
+//       time: "time",
+//       outlet: "Jurong East",
+//       services: "Pigmentation",
+//       beautician: "abcd"
+//     },
+//     {
+//       username: "Ivan Leong",
+//       date: Date.now(),
+//       time: "time",
+//       outlet: "Tanjong Pagar",
+//       services: "Sensitive Skin",
+//       beautician: "efgh"
+//     },
+//   ];
+//   await AppointmentDetails.deleteMany({});
+//   await AppointmentDetails.insertMany(appointmentsSeed);
+//   res.json(appointmentsSeed);
+// });
 
 
 //Get route

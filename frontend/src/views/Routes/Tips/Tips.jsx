@@ -16,7 +16,11 @@ function Tips(props) {
             <Image className="mx-auto d-block" src={TipsIntro} />{" "}
           </Col>
           <Col>
-            <p><b>Featured Beauty Tip</b></p>
+        
+        <h1 class="heading-1">Featured Beauty Tip</h1>
+        <div class="divider-1"> <span></span> </div>
+           
+            <p>With the latest technology & proven aesthetic skin solutions, we have helped hundred of satisfied clients over 15 years. Give us an opportunity to revitalise your glowing skin once again!</p>
             <p>How Do You Treat Skin Pigmentation?</p>
 
 

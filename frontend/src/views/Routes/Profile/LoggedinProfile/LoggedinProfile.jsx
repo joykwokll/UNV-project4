@@ -21,8 +21,13 @@ function LoggedinProfile(props) {
     time: "",
     username: ""
   });
+  const [userDetails, setUserDetails] = useState({
+    username: "",
+    email: "",
+    contact: ""
+  });
 
-  //GET ROUTE
+  //APPT GET ROUTE
   const handleLoggedinProfile = () => {
     let username = sessionStorage.getItem("username")
     console.log("submitted")
@@ -47,6 +52,36 @@ function LoggedinProfile(props) {
   useEffect(() => {
     console.log(appointmentDetails)
   }, [appointmentDetails])
+
+
+  //USER GET ROUTE
+  const handleUserDetails = () => {
+    let username = sessionStorage.getItem("username")
+    console.log("submitted")
+    fetch("/api/users/", {
+      method: "GET",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+        "username": username
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("userdata", data)
+        setUserDetails({ ...userDetails })
+      })
+  }
+
+  useEffect(() => {
+    handleUserDetails()
+  }, [])
+
+  useEffect(() => {
+    console.log(userDetails)
+  }, [userDetails])
+
+
 
   //UPDATE ROUTE
   const handleUpdateAppt = (event) => {
@@ -118,9 +153,21 @@ function LoggedinProfile(props) {
       <br/>
       <Row className="mt-3">
         <Col sm={8} > <div className="profile mx-auto w-75 ">
-          <h3>Your healthy skin starts today</h3>
-          <p>A journey to your healthy skin starts with the first step, and the first step in making a simple decision
-            to give us an opportunity to serve you. Do fill in your details below to give us this chance!</p>
+        <h1 class="heading-1">Your healthy skin starts today</h1>
+        <div class="divider-1"> <span></span> </div>
+        <hr/>
+         
+            <br/>
+           <h4> Your Profile Details</h4>
+           <br/>
+            Username: {userDetails.username} 
+            <br/>
+            <br/>
+            Email: {userDetails.email}
+            <br/>
+            <br/>
+            Contact: {userDetails.contact}
+       
         </div></Col>
 
         <Card style={{ width: '18rem' }}>

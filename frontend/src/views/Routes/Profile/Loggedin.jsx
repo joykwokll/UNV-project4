@@ -32,6 +32,9 @@ function Profile(props) {
     const editProfile = () => {
         navigate("/loggedinprofile");
     }
+    const makeAppointment = () => {
+      navigate("/appointment");
+  }
 
 
   return (
@@ -42,7 +45,7 @@ function Profile(props) {
       <Row className="text-center"><h1>Welcome {username} ~ </h1></Row>
       <Row className="text-center"><h2>Rejuvenate Your Skin With UNV Now!</h2> </Row>
       <Row className="text-center"><h3> <Button variant="outline-dark" size="sm" onClick={editProfile} >Edit profile</Button></h3> </Row>
-      <Row className="text-center"><h3> <Button variant="outline-dark" size="sm" onClick={editProfile} >Make an appointment</Button></h3> </Row>
+      <Row className="text-center"><h3> <Button variant="outline-dark" size="sm" onClick={makeAppointment} >Make an appointment</Button></h3> </Row>
       </Container>
 
   );

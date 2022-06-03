@@ -44,6 +44,13 @@ router.get("/seed", async (req, res) => {
   res.json(userDetails);
 });
 
+//Get User Detials
+router.get("/", async (req, res) => {
+  const userDetail = await User.findOne({ username: req.headers.username })
+  console.log("User FOUND", userDetail)
+  res.send({ userDetail });
+});
+
 //Register
 router.post("/register", async (req, res) => {
   const saltRounds = 10;

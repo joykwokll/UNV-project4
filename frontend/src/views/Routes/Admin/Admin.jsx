@@ -54,7 +54,7 @@ function Admin(props) {
                                 <Card.Title>Recent Appointments Made</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">Appointment Details</Card.Subtitle>
                                 <ListGroup variant="flush">
-                                    {adminAppointmentDetails.date && <>
+                                    {adminAppointmentDetail.date && <>
                                         <ListGroup.Item>Date: {adminAppointmentDetail.date.slice(0, 10)}</ListGroup.Item>
                                         <ListGroup.Item>Time: {adminAppointmentDetail.time}</ListGroup.Item>
                                         <ListGroup.Item>Outlet: {adminAppointmentDetail.outlet}</ListGroup.Item>

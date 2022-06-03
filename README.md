@@ -3,12 +3,12 @@
 ## Project Brief
 ### Technical Requirements
 
-- Use MongoDB, Express, React and Node (MERN Stack)
+- Use MongoDB, Express, React and Node (MERN Stack).
 - Have at least 2 related models (with references) and an additional user model with authentication. There should be at least 2 types of users.
-- Include all major CRUD functions for at least one of the models
+- Include all major CRUD functions for at least one of the models.
 - Nicely styled front-end with clean & well-formatted CSS, with or without a framework.
-- Deploy your application online, so that it is publically accessible
-- User stories that apply to the functionality of your app, crafted as a team.
+- Deploy your application online, so that it is publically accessible.
+- User stories that apply to the functionality of your app.
 
 ### Final Deliverables
 - Deployed on Heroku: https://unv-project4.herokuapp.com/
@@ -148,6 +148,8 @@ Another main hurdle will be the part where I allow login with either Username, E
 11. Customers to leave reviews in Google reviews and fetch google API to display it in the website.
 12. Join us page to post job listings needed in the company. Allow public to apply for the job.
 13. Beauty tips page to act like a forum/blog. Users will be able to post, like and comment. 
+14. Beauty tips able to post and upload photos on individual testimonals and the treatment journey. 
+15. Admin able to edit and post successful cases with before and after images.
 
 
 ### Screenshots of WIP

@@ -126,10 +126,10 @@ Another main hurdle will be the part where I allow login with either Username, E
 
 ### Unsolved Problems (Will be improving them too)
 
-1a. Admin route to require login and only can be accessed by Admins.
-1b. Admin to be able to edit or delete the appointments in the admin routes.
-1c. Admin to be able to check off the appointments after treatment is completed. 
-1d. In any case where customers did not turn up of the session, admin can add in a comment under the appointment in the admin route. 
+1. Admin route to require login and only can be accessed by Admins.
+2. Admin to be able to edit or delete the appointments in the admin routes.
+3. Admin to be able to check off the appointments after treatment is completed. 
+4. In any case where customers did not turn up of the session, admin can add in a comment under the appointment in the admin route. 
 
 
 

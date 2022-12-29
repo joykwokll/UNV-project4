@@ -3,12 +3,12 @@
 ## Project Brief
 ### Technical Requirements
 
-- Use MongoDB, Express, React and Node (MERN Stack)
+- Use MongoDB, Express, React and Node (MERN Stack).
 - Have at least 2 related models (with references) and an additional user model with authentication. There should be at least 2 types of users.
-- Include all major CRUD functions for at least one of the models
+- Include all major CRUD functions for at least one of the models.
 - Nicely styled front-end with clean & well-formatted CSS, with or without a framework.
-- Deploy your application online, so that it is publically accessible
-- User stories that apply to the functionality of your app, crafted as a team.
+- Deploy your application online, so that it is publically accessible.
+- User stories that apply to the functionality of your app.
 
 ### Final Deliverables
 - Deployed on Heroku: https://unv-project4.herokuapp.com/
@@ -16,7 +16,7 @@
 
 ##  Description
 
-UNV Aesthetics Salon is a well established beauty and wellness brand that is in the market for almost 19 years. It provides first class treatments and have won numerous awards over the years. Their original website does not include an appointment feature and this is where my inspiration and idea came from. 
+UNV Aesthetics Salon is a well established beauty and wellness brand that is in the market for almost 19 years. It provides first class treatments and have won numerous awards over the years. Their original website does not include an appointment feature and this is where my inspiration and idea came from. It is built using MongoDB-Express-React-NodeJs (MERN stack).
 
 ### Technologies Used
 - React: CRA (Front-end)
@@ -87,25 +87,69 @@ Sample Data: https://docs.google.com/spreadsheets/d/1yeQZ79UxBNOltaZIYBmq8SFcuM_
 
 6. Input content accordingly to each route. Make sure that all the CSS are in place. 
 
+7. Start building up user account and register/login using jwt. Get the jwt token stored and the sessions working. Create the register and login form and route in the front end. Link the data to MongoDB and get both front-end fetch and back-end post to work together. 
+
+8. Set up log out and allow customers to log out successfully.
+
+9. Create reset password route and button, do up the logic and link to gmail. Get it working together with the database. Reset password successfully.
+
+10. Allow login with either Email, Contact or Username. 
+
 **Week 3**
 
-1. Front-end: 
+1. Create appointment form and CSS. Does both front-end fetch and back-end post for the appointment. Allow creation of appointments. 
 
-7. Complete this read-me page.
+2. Display their respective appointments accordingly through their username on the profile page.
 
+3. Allow editing and deleting of appointments. Do up valid alerts if successful, and invalid alerts if there is an error.
+
+4. Display profile details of each individual users on their profile page.
+
+5. Create an admin route where only the admin will know this route and they will be able to see all the appointments made at one glance in a page.
+
+6. Edit the icon's image and name on the tab to display as UNV brand logo and name.  
+
+7. Add and commit throughout and deploy to heroku.
+
+8. Clean up CSS and make sure everything are in position. Add in divider and footer bar. 
+
+9. Complete this read-me page.
 
 
 ### Major Hurdles
 
-One main hurdle is the reset password part. It is much more complicated than I expected. There are multiple unexpected errors and crashes.
-
-
-### Unsolved Problems and Possible Improvements
-
-1. 
+One main hurdle is the reset password part. It is much more complicated than I expected. There are multiple unexpected errors and crashes along the way. 
+Deployment to heroku wasn't as smooth sailing too. However, I googled the error and solved them one after another overtime.  
+Another main hurdle will be the part where I allow login with either Username, Email or Contact number. I spent quite awhile trying to get the logic to work. 
 
 
 
+### Unsolved Problems (Will be improving them too)
+
+1. Admin route to require login and only can be accessed by Admins.
+2. Admin to be able to edit or delete the appointments in the admin routes.
+3. Admin to be able to check off the appointments after treatment is completed. 
+4. In any case where customers did not turn up of the session, admin can add in a comment under the appointment in the admin route. 
+
+
+
+### Possible Improvements
+
+1. Add a "Contact me" button or a form for customers to fill up at the bottom of every service pages in any event they might be interested. This will either lead them to the appointment page, or directly request them to send us an email for a follow up.
+2. To inform the customer if their requested appointment slot is unavailable. (Display all the appointment timings, and grey out any taken slots)
+3. Sent an email to their respective email to confirm appointment made.
+4. Email reminder to be sent to customers one day prior to their arranged appointment.
+5. User's profile page to show the history of the previous appointments made.
+6. Allow the booking of recurring appointments for example every 5th of the month.
+7. Add a promotion page and a form to allow customers to sign up for discounted first trial.
+8. Allow customers to create a personalised account. For example, in the register process, they will get to pick out their key concerns needs and main skin issues they would like to focus on. (eg, pigmentation, pimples, anti-aging, etc) 
+9. Record the bill for each facial session in the profile page.
+10. Services can be sold in package. Allow products to be purchased off this website too.
+11. Customers to leave reviews in Google reviews and fetch google API to display it in the website.
+12. Join us page to post job listings needed in the company. Allow public to apply for the job.
+13. Beauty tips page to act like a forum/blog. Users will be able to post, like and comment. 
+14. Beauty tips able to post and upload photos on individual testimonals and the treatment journey. 
+15. Admin able to edit and post successful cases with before and after images.
 
 
 ### Screenshots of WIP
